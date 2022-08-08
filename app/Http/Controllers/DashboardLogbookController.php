@@ -104,11 +104,12 @@ class DashboardLogbookController extends Controller
      */
     public function update(Request $request, Logbook $logbook)
     {
-        // dd($logbook->id);
+        // dd(Mahasiswa::where('id', $logbook->mahasiswa_id)->pluck('npm'));
         $validateData = ['isHadir' => 'required'];
         $validateData['isHadir'] = $request->isHadir;
         logbook::where('id', $logbook->id)->update($validateData);
-        return redirect('/dashboard')->with('success', 'post has been updated!');
+        $npm = Mahasiswa::where('id', $logbook->mahasiswa_id)->value('npm');
+        return redirect('/dashboard/logbooks/mhs/' . $npm)->with('success', 'post has been updated!');
     }
 
     /**

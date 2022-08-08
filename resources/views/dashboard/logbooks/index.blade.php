@@ -44,7 +44,7 @@
                 @can('dosen')
                     @if ($logbook->isHadir == 1)
                         <div class="text-center mt-3">
-                            <a href="#" class="btn btn-success">Hadir</a>
+                            <a href="/dashboard/logbooks/{{ $logbook->id }}/edit" class="btn btn-success">Hadir</a>
                         </div>
                     @else
                         <div class="text-center mt-3">
