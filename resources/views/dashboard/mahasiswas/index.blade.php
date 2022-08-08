@@ -19,7 +19,7 @@
 
     <div class="table-responsive col-lg-12">
         @can('koordinator')
-            <a href="/dashboard/register/mhs" class="btn btn-primary">Tambah Mahasiswa</a>
+            <a href="/dashboard/mahasiswas/create" class="btn btn-primary">Tambah Mahasiswa</a>
         @endcan
         <table class="table table-striped table-sm">
             <thead>

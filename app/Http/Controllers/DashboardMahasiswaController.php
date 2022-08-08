@@ -65,6 +65,12 @@ class DashboardMahasiswaController extends Controller
 
         Mahasiswa::create($validateData);
 
+        User::create([
+            'username' => $request->npm,
+            'roles' => 'mahasiswa',
+            'password' => bcrypt('12345')
+        ]);
+
         $user = User::where('roles', 'mahasiswa')->get()->last();
         $mahasiswa = Mahasiswa::all()->last();
 

@@ -13,8 +13,7 @@
             <div class="mb-3">
                 <label for="npm" class="form-label">NPM</label>
                 <input type="text" class="form-control @error('npm') is-invalid @enderror" id="npm" name="npm"
-                    value="{{ $users->username }}" required disabled>
-                <input type="hidden" name="npm" value="{{ $users->username }}">
+                    value="{{ old('npm') }}" required autofocus>
                 @error('npm')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -24,7 +23,7 @@
             <div class="mb-3">
                 <label for="nama" class="form-label">Nama</label>
                 <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama"
-                    autofocus value="{{ old('nama') }}" required>
+                    value="{{ old('nama') }}" required>
                 @error('nama')
                     <div class="invalid-feedback">
                         {{ $message }}
