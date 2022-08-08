@@ -13,7 +13,15 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return view('register.index', [
+        return view('dashboard.dosens.register', [
+            'title' => 'Register',
+            'active' => 'register'
+        ]);
+    }
+
+    public function indexMhs()
+    {
+        return view('dashboard.mahasiswas.register', [
             'title' => 'Register',
             'active' => 'register'
         ]);
@@ -21,10 +29,12 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request);
         $validatedData = $request->validate([
-            'name' => 'required|max:255',
+            // 'name' => 'required|max:255',
             'username' => ['required', 'min:3', 'unique:users'],
-            'email' => 'required|email:dns|unique:users',
+            'roles' => ['required'],
+            // 'email' => 'required|email|unique:users',
             'password' => 'required|min:5|max:255'
         ]);
 
@@ -37,6 +47,10 @@ class RegisterController extends Controller
         // $request->session()->flash('success', 'Registration successfull! Please login');
         // return redirect('/login');
 
-        return redirect('/login')->with('success', 'Registration successfull! Please login');
+        if ($validatedData['roles'] == 'dosen') {
+            return redirect('/dashboard/dosens/create')->with('success', 'Registration successfull! Please login');
+        } else {
+            return redirect('/dashboard/mahasiswas/create')->with('success', 'Registration successfull! Please login');
+        }
     }
 }

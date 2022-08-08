@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsKoordinator
+class IsDosen
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,9 @@ class IsKoordinator
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->guest() || auth()->user()->roles !== 'koordinator' && auth()->user()->roles !== 'dosen') { //kodisi akun yang belum login
+        if (auth()->guest() || auth()->user()->roles !== 'dosen') { //kodisi akun yang belum login
             abort(403);
         }
-
         return $next($request);
     }
 }

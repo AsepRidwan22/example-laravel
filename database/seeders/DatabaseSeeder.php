@@ -7,7 +7,10 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Mahasiswa;
+use App\Models\Dosen;
+use App\Models\Logbook;
 use App\Models\Post;
+use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,90 +21,110 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10)->create();
+        // User::factory(10)->create(); //user dummy
+        // Post::factory(20)->create(); //buat post dummy
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
+        // Category::create([
+        //     'name' => 'Web Programming',
+        //     'slug' => 'web-porgramming'
         // ]);
 
+        // Category::create([
+        //     'name' => 'Personal',
+        //     'slug' => 'personal'
+        // ]);
+
+
+        //mahasiswa
         User::create([
-            'name' => 'Asep Ridwan',
+            // 'name' => 'Asep Ridwan',
             'username' => '5520119040',
-            'roles' => 'koordinator',
-            'email' => 'asep@gmail',
+            'roles' => 'mahasiswa',
+            // 'email' => 'asep@gmail',
             'password' => bcrypt('12345')
         ]);
 
-        // User::create([
-        //     'name' => 'Ridwan Malik',
-        //     'email' => 'ridwan@gmail',
-        //     'password' => bcrypt('12345')
-        // ]);
-
-        Category::create([
-            'name' => 'Web Programming',
-            'slug' => 'web-porgramming'
+        User::create([
+            // 'name' => 'Udin Saparudin',
+            'username' => '5520119041',
+            'roles' => 'mahasiswa',
+            // 'email' => 'udin@gmail',
+            'password' => bcrypt('12345')
         ]);
 
-        Category::create([
-            'name' => 'Personal',
-            'slug' => 'personal'
+        //koordinator
+        User::create([
+            // 'name' => 'diny',
+            'username' => '0325075801',
+            'roles' => 'koordinator',
+            // 'email' => 'diny@gmail',
+            'password' => bcrypt('12345')
         ]);
 
-        Post::factory(20)->create();
+        //dosen
+        User::create([
+            // 'name' => 'Ridwan',
+            'username' => '0325075802',
+            'roles' => 'dosen',
+            // 'email' => 'ridwan@gmail',
+            'password' => bcrypt('12345')
+        ]);
 
-        // Post::create([
-        //     'title' => 'judul Pertama',
-        //     'slug' => 'judul-pertama',
-        //     'category_id' => 1,
-        //     'user_id' => 1,
-        //     'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci quis soluta officia reprehenderit ipsum deserunt maxime eum aspernatur incidunt qui commodi voluptatibus beatae repellat, alias dignissimos asperiores ab minus illo iusto. Natus beatae magni hic, ratione aut necessitatibus quia distinctio, delectus numquam magnam consequatur ab commodi veritatis molestias quis nemo laudantium vitae sit, rerum quas reprehenderit. ',
-        //     'body' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci quis soluta officia reprehenderit ipsum deserunt maxime eum aspernatur incidunt qui commodi voluptatibus beatae repellat, alias dignissimos asperiores ab minus illo iusto. Natus beatae magni hic, ratione aut necessitatibus quia distinctio, delectus numquam magnam consequatur ab commodi veritatis molestias quis nemo laudantium vitae sit, rerum quas reprehenderit. Corrupti, incidunt cupiditate possimus inventore dolor voluptas deserunt unde a itaque odio veniam quas odit, corporis tempora voluptates ullam, suscipit iure. Placeat numquam aspernatur delectus at culpa ipsam? Sapiente quis dolor nesciunt vero, pariatur dolores aspernatur asperiores, doloribus autem iste corporis reprehenderit, minima commodi.',
-        // ]);
+        User::create([
+            // 'name' => 'abdul',
+            'username' => '0325075803',
+            'roles' => 'dosen',
+            // 'email' => 'abdul@gmail',
+            'password' => bcrypt('12345')
+        ]);
 
-        // Post::create([
-        //     'title' => 'judul Kedua',
-        //     'slug' => 'judul-Kedua',
-        //     'category_id' => 1,
-        //     'user_id' => 1,
-        //     'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci quis soluta officia reprehenderit ipsum deserunt maxime eum aspernatur incidunt qui commodi voluptatibus beatae repellat, alias dignissimos asperiores ab minus illo iusto. Natus beatae magni hic, ratione aut necessitatibus quia distinctio, delectus numquam magnam consequatur ab commodi veritatis molestias quis nemo laudantium vitae sit, rerum quas reprehenderit. ',
-        //     'body' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci quis soluta officia reprehenderit ipsum deserunt maxime eum aspernatur incidunt qui commodi voluptatibus beatae repellat, alias dignissimos asperiores ab minus illo iusto. Natus beatae magni hic, ratione aut necessitatibus quia distinctio, delectus numquam magnam consequatur ab commodi veritatis molestias quis nemo laudantium vitae sit, rerum quas reprehenderit. Corrupti, incidunt cupiditate possimus inventore dolor voluptas deserunt unde a itaque odio veniam quas odit, corporis tempora voluptates ullam, suscipit iure. Placeat numquam aspernatur delectus at culpa ipsam? Sapiente quis dolor nesciunt vero, pariatur dolores aspernatur asperiores, doloribus autem iste corporis reprehenderit, minima commodi.',
-        // ]);
-
-        // Post::create([
-        //     'title' => 'judul Ketiga',
-        //     'slug' => 'judul-Ketiga',
-        //     'category_id' => 2,
-        //     'user_id' => 1,
-        //     'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci quis soluta officia reprehenderit ipsum deserunt maxime eum aspernatur incidunt qui commodi voluptatibus beatae repellat, alias dignissimos asperiores ab minus illo iusto. Natus beatae magni hic, ratione aut necessitatibus quia distinctio, delectus numquam magnam consequatur ab commodi veritatis molestias quis nemo laudantium vitae sit, rerum quas reprehenderit. ',
-        //     'body' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci quis soluta officia reprehenderit ipsum deserunt maxime eum aspernatur incidunt qui commodi voluptatibus beatae repellat, alias dignissimos asperiores ab minus illo iusto. Natus beatae magni hic, ratione aut necessitatibus quia distinctio, delectus numquam magnam consequatur ab commodi veritatis molestias quis nemo laudantium vitae sit, rerum quas reprehenderit. Corrupti, incidunt cupiditate possimus inventore dolor voluptas deserunt unde a itaque odio veniam quas odit, corporis tempora voluptates ullam, suscipit iure. Placeat numquam aspernatur delectus at culpa ipsam? Sapiente quis dolor nesciunt vero, pariatur dolores aspernatur asperiores, doloribus autem iste corporis reprehenderit, minima commodi.',
-        // ]);
-
-        // Post::create([
-        //     'title' => 'judul ke empat',
-        //     'slug' => 'judul-ke-empat',
-        //     'category_id' => 2,
-        //     'user_id' => 1,
-        //     'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci quis soluta officia reprehenderit ipsum deserunt maxime eum aspernatur incidunt qui commodi voluptatibus beatae repellat, alias dignissimos asperiores ab minus illo iusto. Natus beatae magni hic, ratione aut necessitatibus quia distinctio, delectus numquam magnam consequatur ab commodi veritatis molestias quis nemo laudantium vitae sit, rerum quas reprehenderit. ',
-        //     'body' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci quis soluta officia reprehenderit ipsum deserunt maxime eum aspernatur incidunt qui commodi voluptatibus beatae repellat, alias dignissimos asperiores ab minus illo iusto. Natus beatae magni hic, ratione aut necessitatibus quia distinctio, delectus numquam magnam consequatur ab commodi veritatis molestias quis nemo laudantium vitae sit, rerum quas reprehenderit. Corrupti, incidunt cupiditate possimus inventore dolor voluptas deserunt unde a itaque odio veniam quas odit, corporis tempora voluptates ullam, suscipit iure. Placeat numquam aspernatur delectus at culpa ipsam? Sapiente quis dolor nesciunt vero, pariatur dolores aspernatur asperiores, doloribus autem iste corporis reprehenderit, minima commodi.',
-        // ]);
-
-        // Post::create([
-        //     'title' => 'judul ke lima',
-        //     'slug' => 'judul-ke-lima',
-        //     'category_id' => 2,
-        //     'user_id' => 2,
-        //     'excerpt' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci quis soluta officia reprehenderit ipsum deserunt maxime eum aspernatur incidunt qui commodi voluptatibus beatae repellat, alias dignissimos asperiores ab minus illo iusto. Natus beatae magni hic, ratione aut necessitatibus quia distinctio, delectus numquam magnam consequatur ab commodi veritatis molestias quis nemo laudantium vitae sit, rerum quas reprehenderit. ',
-        //     'body' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci quis soluta officia reprehenderit ipsum deserunt maxime eum aspernatur incidunt qui commodi voluptatibus beatae repellat, alias dignissimos asperiores ab minus illo iusto. Natus beatae magni hic, ratione aut necessitatibus quia distinctio, delectus numquam magnam consequatur ab commodi veritatis molestias quis nemo laudantium vitae sit, rerum quas reprehenderit. Corrupti, incidunt cupiditate possimus inventore dolor voluptas deserunt unde a itaque odio veniam quas odit, corporis tempora voluptates ullam, suscipit iure. Placeat numquam aspernatur delectus at culpa ipsam? Sapiente quis dolor nesciunt vero, pariatur dolores aspernatur asperiores, doloribus autem iste corporis reprehenderit, minima commodi.',
-        // ]);
+        Mahasiswa::create([
+            'nama' => 'Asep Ridwan',
+            'npm' => '5520119040',
+            'kelas' => 'IF B 2019',
+            'email' => 'udin@gmail.com',
+            'user_id' => '4',
+            'dosen_id' => '1'
+        ]);
 
         Mahasiswa::create([
             'nama' => 'udin saparudin',
-            'npm' => '5520119076',
+            'npm' => '5520119041',
             'kelas' => 'IF B 2019',
-            'email' => 'udinsprudidn@gmail.com',
-            'user_id' => '1',
+            'email' => 'asep@gmail.com',
+            'user_id' => '5',
+            'dosen_id' => '2'
         ]);
+
+        Dosen::create([
+            'nama' => 'ridwan',
+            'nidn' => '0325075802',
+            'email' => 'ridwan@gmail.com',
+            'user_id' => '1'
+        ]);
+
+        Dosen::create([
+            'nama' => 'abdul',
+            'nidn' => '0325075803',
+            'email' => 'abdul@gmail.com',
+            'user_id' => '2'
+        ]);
+
+        Logbook::create([
+            'isHadir' => true,
+            'mahasiswa_id' => 1,
+            'user_id' => 1,
+            'date' => Carbon::now()->isoFormat('dddd, D MMMM Y'),
+            'body' => 'pada pertemuan pertama saya membahas apa yang diinginkan oleh pembimbing saya'
+        ]);
+
+        Logbook::create([
+            'isHadir' => true,
+            'mahasiswa_id' => 1,
+            'user_id' => 1,
+        ]);
+
+        Logbook::factory(10)->create(['user_id' => 1, 'mahasiswa_id' => 1]);
+        Logbook::factory(10)->create(['user_id' => 2, 'mahasiswa_id' => 2]);
     }
 }

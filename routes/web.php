@@ -8,6 +8,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\DashboardMahasiswaController;
 use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\DashboardDosenController;
+use App\Http\Controllers\DashboardLogbookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,8 +76,10 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
 
-Route::get('/register', [RegisterController::class, 'index']);
-Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
+Route::get('/dashboard/register', [RegisterController::class, 'index']);
+Route::get('/dashboard/register/mhs', [RegisterController::class, 'indexMhs']);
+Route::post('/dashboard/register', [RegisterController::class, 'store']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard.index');
@@ -84,5 +88,14 @@ Route::get('/dashboard', function () {
 
 // Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
-Route::resource('/dashboard/mahasiswas', DashboardMahasiswaController::class)->middleware('auth');
+
+Route::resource('/dashboard/mahasiswas', DashboardMahasiswaController::class)->middleware(['is_koordinator']);
+
 Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('is_koordinator');
+
+Route::resource('/dashboard/dosens', DashboardDosenController::class)->except('show')->middleware('auth');
+
+Route::resource('/dashboard/logbooks', DashboardLogbookController::class)->middleware('auth');
+Route::get('/dashboard/logbooks/mhs/{mahasiswa:npm}', [DashboardLogbookController::class, 'showLogbookMhs']);
+
+// Route::get('/dashboard/logbooks/{logbooks:user_id}', DashboardLogbookController::class, 'show2')->middleware('auth');

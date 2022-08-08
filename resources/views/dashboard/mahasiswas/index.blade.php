@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Mahasiswa</h1>
+        <h1 class="h2">Mahasiswa </h1>
     </div>
 
     @if (session()->has('success'))
@@ -18,7 +18,9 @@
     @endif
 
     <div class="table-responsive col-lg-12">
-        <a href="/dashboard/mahasiswas/create " class="btn btn-primary">Tambah Mahasiswa</a>
+        @can('koordinator')
+            <a href="/dashboard/register/mhs" class="btn btn-primary">Tambah Mahasiswa</a>
+        @endcan
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
@@ -40,9 +42,9 @@
                         <td>{{ $mahasiswa->npm }}</td>
                         <td>{{ $mahasiswa->kelas }}</td>
                         <td>{{ $mahasiswa->email }}</td>
-                        <td>{{ $mahasiswa->pembimbing->name }}</td>
+                        <td>{{ $mahasiswa->pembimbing->nama }}</td>
                         <td>
-                            <a href="/dashboard/mahasiswas/{{ $mahasiswa->slug }}" class="badge bg-info"><span
+                            <a href="/dashboard/logbooks/mhs/{{ $mahasiswa->npm }}" class="badge bg-info"><span
                                     data-feather="eye"></span></a>
                             <a href="/dashboard/mahasiswas/{{ $mahasiswa->slug }}/edit" class="badge bg-warning"><span
                                     data-feather="edit"></span></a>

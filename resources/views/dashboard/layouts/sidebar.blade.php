@@ -7,33 +7,57 @@
                     Dashboard
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link {{ Request::is('dashboard/posts*') ? 'active' : '' }}" href="/dashboard/posts">
                     <span data-feather="file-text" class="align-text-bottom"></span>
                     My Post
                 </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Request::is('dashboard/mahasiswas*') ? 'active' : '' }}"
-                    href="/dashboard/mahasiswas">
-                    <span data-feather="file-text" class="align-text-bottom"></span>
-                    Mahasiswa
-                </a>
-            </li>
+            </li> --}}
+            @can('mahasiswa')
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/logbooks*') ? 'active' : '' }}" href="/dashboard/logbooks">
+                        <span data-feather="file-text" class="align-text-bottom"></span>
+                        Logbook
+                    </a>
+                </li>
+            @endcan
+            @can('dosen')
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/mahasiswas*') ? 'active' : '' }}"
+                        href="/dashboard/mahasiswas">
+                        <span data-feather="file-text" class="align-text-bottom"></span>
+                        Mahasiswa
+                    </a>
+                </li>
+            @endcan
         </ul>
-
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Administrator</span>
-        </h6>
-        <ul class="nav flex-column">
-            <li class="nav-item ">
-                <a class="nav-link {{ Request::is('dashboard/categories*') ? 'active' : '' }}" aria-current="page"
-                    href="/dashboard/categories">
-                    <span data-feather="grid" class="align-text-bottom"></span>
-                    Post Categories
-                </a>
-            </li>
-        </ul>
+        @can('koordinator')
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>Administrator</span>
+            </h6>
+            <ul class="nav flex-column">
+                {{-- <li class="nav-item ">
+                    <a class="nav-link {{ Request::is('dashboard/categories*') ? 'active' : '' }}" aria-current="page"
+                        href="/dashboard/categories">
+                        <span data-feather="grid" class="align-text-bottom"></span>
+                        Post Categories
+                    </a>
+                </li> --}}
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/mahasiswas*') ? 'active' : '' }}"
+                        href="/dashboard/mahasiswas">
+                        <span data-feather="file-text" class="align-text-bottom"></span>
+                        Mahasiswa
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/dosens*') ? 'active' : '' }}" href="/dashboard/dosens">
+                        <span data-feather="file-text" class="align-text-bottom"></span>
+                        Dosen
+                    </a>
+                </li>
+            </ul>
+        @endcan
 
     </div>
 </nav>

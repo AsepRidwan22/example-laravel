@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('nidn');
             $table->string('email')->unique();
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

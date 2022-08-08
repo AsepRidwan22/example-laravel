@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Dosen;
+use App\Models\Mahasiswa;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class AdminCategoryController extends Controller
+class DashboardDosenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +16,9 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        // if (auth()->guest() || auth()->user()->username !== '5520119040') { //kodisi akun yang belum login
-        //     abort(403);
-        // }
-        // $this->authorize('is_koordinator');
-
-        return view('dashboard.categories.index', [
-            'categories' => Category::all()
+        return view('dashboard.dosens.index', [
+            'dosens' => Dosen::all(),
+            'mahasiswas' => Mahasiswa::all()
         ]);
     }
 
@@ -31,7 +29,9 @@ class AdminCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.dosens.create', [
+            'users' => User::where('roles', 'dosen')->get()->last()
+        ]);
     }
 
     /**
@@ -42,16 +42,26 @@ class AdminCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+
+        $validateData = $request->validate([
+            'nama' => 'required|max:255',
+            'nidn' => 'required',
+            'email' => 'required|email',
+            'user_id' => 'required'
+        ]);
+
+        Dosen::create($validateData);
+        return redirect('/dashboard/dosens')->with('success', 'New post has been added!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(category $category)
+    public function show($id)
     {
         //
     }
@@ -59,10 +69,10 @@ class AdminCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(category $category)
+    public function edit($id)
     {
         //
     }
@@ -71,10 +81,10 @@ class AdminCategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, category $category)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -82,10 +92,10 @@ class AdminCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(category $category)
+    public function destroy($id)
     {
         //
     }

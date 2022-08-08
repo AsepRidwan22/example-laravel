@@ -39,6 +39,7 @@
                             </div>
                         @enderror
                     </div>
+                    <input type="hidden" name="roles" value="dosen">
                     <div class="form-floating">
                         <input type="password" class="form-control rounded-bottom @error('password') is-invalid @enderror"
                             name="password" id="password" placeholder="Password" required>

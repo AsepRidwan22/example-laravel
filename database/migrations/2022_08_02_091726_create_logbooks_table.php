@@ -15,7 +15,11 @@ return new class extends Migration
     {
         Schema::create('logbooks', function (Blueprint $table) {
             $table->id();
-            $table->text('body');
+            $table->string('date')->nullable();
+            $table->text('body')->nullable();
+            $table->foreignId('mahasiswa_id')->nullable();
+            $table->foreignId('user_id')->nullable();
+            $table->boolean('isHadir')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
