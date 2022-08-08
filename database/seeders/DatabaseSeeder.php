@@ -83,7 +83,7 @@ class DatabaseSeeder extends Seeder
             'npm' => '5520119040',
             'kelas' => 'IF B 2019',
             'email' => 'udin@gmail.com',
-            'user_id' => '4',
+            'user_id' => '1',
             'dosen_id' => '1'
         ]);
 
@@ -92,7 +92,7 @@ class DatabaseSeeder extends Seeder
             'npm' => '5520119041',
             'kelas' => 'IF B 2019',
             'email' => 'asep@gmail.com',
-            'user_id' => '5',
+            'user_id' => '2',
             'dosen_id' => '2'
         ]);
 
@@ -100,14 +100,14 @@ class DatabaseSeeder extends Seeder
             'nama' => 'ridwan',
             'nidn' => '0325075802',
             'email' => 'ridwan@gmail.com',
-            'user_id' => '1'
+            'user_id' => '4'
         ]);
 
         Dosen::create([
             'nama' => 'abdul',
             'nidn' => '0325075803',
             'email' => 'abdul@gmail.com',
-            'user_id' => '2'
+            'user_id' => '5'
         ]);
 
         Logbook::create([
