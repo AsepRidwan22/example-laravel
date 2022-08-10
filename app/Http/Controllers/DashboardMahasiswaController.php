@@ -74,7 +74,7 @@ class DashboardMahasiswaController extends Controller
         $user = User::where('roles', 'mahasiswa')->get()->last();
         $mahasiswa = Mahasiswa::all()->last();
 
-        Logbook::factory(10)->create(['user_id' => $user, 'mahasiswa_id' => $mahasiswa]);
+        Logbook::factory(7)->create(['user_id' => $user, 'mahasiswa_id' => $mahasiswa]);
         return redirect('/dashboard/mahasiswas')->with('success', 'New post has been added!');
     }
 

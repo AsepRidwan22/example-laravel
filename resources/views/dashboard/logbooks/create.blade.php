@@ -6,13 +6,16 @@
     </div>
 
     <div class="col-lg-8">
-        <form method="POST" action="/dashboard/logbooks" class="mb-5" enctype="multipart/form-data">
+        <form method="POST" action="/dashboard/logbook/create/{{ $logbook_id }}" class="mb-5"
+            enctype="multipart/form-data">
             @csrf
+            @method('put')
             <div class="mb-3">
                 {{-- <label for="body" class="form-label">body</label> --}}
                 @error('body')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
+                <input type="hidden" name="id" value="{{ $logbook_id }}">
                 <input id="body" type="hidden" name="body" required value="{{ old('body') }}">
                 <trix-editor input="body"></trix-editor>
             </div>

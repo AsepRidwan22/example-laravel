@@ -96,6 +96,8 @@ Route::resource('/dashboard/categories', AdminCategoryController::class)->except
 Route::resource('/dashboard/dosens', DashboardDosenController::class)->except('show')->middleware('auth');
 
 Route::resource('/dashboard/logbooks', DashboardLogbookController::class)->middleware('auth');
+Route::get('/dashboard/logbooks/{logbooks:id}/create', [DashboardLogbookController::class, 'bodyUpdate'])->middleware('auth');
+Route::put('/dashboard/logbook/create/{logbooks:id}', [DashboardLogbookController::class, 'createUpdate'])->middleware('auth');
 Route::get('/dashboard/logbooks/mhs/{mahasiswa:npm}', [DashboardLogbookController::class, 'showLogbookMhs']);
 
 // Route::get('/dashboard/logbooks/{logbooks:user_id}', DashboardLogbookController::class, 'show2')->middleware('auth');

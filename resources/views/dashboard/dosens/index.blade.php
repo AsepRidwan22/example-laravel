@@ -26,28 +26,28 @@
                     <th scope="col">Nama</th>
                     <th scope="col">NIDN</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Mahasiswa</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" class="text-center">Mahasiswa</th>
+                    <th scope="col" class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($dosens as $dosen)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $dosen->nama }}</td>
-                        <td>{{ $dosen->nidn }}</td>
-                        <td>{{ $dosen->email }}</td>
-                        <td>{{ $mahasiswas->where('dosen_id', $dosen->id)->count() }}</td>
-                        <td>
-                            <a href="/dashboard/dosens/{{ $dosen->slug }}" class="badge bg-info"><span
-                                    data-feather="eye"></span></a>
-                            <a href="/dashboard/dosens/{{ $dosen->slug }}/edit" class="badge bg-warning"><span
-                                    data-feather="edit"></span></a>
+                        <td class="py-2">{{ $loop->iteration }}</td>
+                        <td class="py-2">{{ $dosen->nama }}</td>
+                        <td class="py-2">{{ $dosen->nidn }}</td>
+                        <td class="py-2">{{ $dosen->email }}</td>
+                        <td class="py-2 text-center">{{ $mahasiswas->where('dosen_id', $dosen->id)->count() }}</td>
+                        <td class="py-1 text-center">
+                            <button href="/dashboard/dosens/{{ $dosen->slug }}" class="badge bg-primary border-0">List
+                                Mahasiswa</button>
+                            <button href="/dashboard/dosens/{{ $dosen->slug }}/edit"
+                                class="badge bg-warning border-0">Ubah</button>
                             <form action="/dashboard/dosens/{{ $dosen->slug }}" method="POST" class="d-inline">
                                 @method('delete')
                                 @csrf
-                                <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')"><span
-                                        data-feather="x-circle"></span></button>
+                                <button class="badge bg-danger border-0"
+                                    onclick="return confirm('Are you sure?')">Hapus</button>
                             </form>
                         </td>
                     </tr>

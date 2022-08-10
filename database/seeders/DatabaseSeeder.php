@@ -110,21 +110,21 @@ class DatabaseSeeder extends Seeder
             'user_id' => '5'
         ]);
 
-        Logbook::create([
-            'isHadir' => true,
-            'mahasiswa_id' => 1,
-            'user_id' => 1,
-            'date' => Carbon::now()->isoFormat('dddd, D MMMM Y'),
-            'body' => 'pada pertemuan pertama saya membahas apa yang diinginkan oleh pembimbing saya'
-        ]);
+        // Logbook::create([
+        //     'isHadir' => true,
+        //     'mahasiswa_id' => 1,
+        //     'user_id' => 1,
+        //     'date' => Carbon::now()->isoFormat('dddd, D MMMM Y'),
+        //     'body' => 'pada pertemuan pertama saya membahas apa yang diinginkan oleh pembimbing saya'
+        // ]);
 
-        Logbook::create([
-            'isHadir' => true,
-            'mahasiswa_id' => 1,
-            'user_id' => 1,
-        ]);
+        // Logbook::create([
+        //     'isHadir' => true,
+        //     'mahasiswa_id' => 1,
+        //     'user_id' => 1,
+        // ]);
 
-        Logbook::factory(10)->create(['user_id' => 1, 'mahasiswa_id' => 1]);
-        Logbook::factory(10)->create(['user_id' => 2, 'mahasiswa_id' => 2]);
+        Logbook::factory(7)->create(['user_id' => 1, 'mahasiswa_id' => 1]);
+        Logbook::factory(7)->create(['user_id' => 2, 'mahasiswa_id' => 2]);
     }
 }

@@ -30,29 +30,30 @@
                     <th scope="col">Kelas</th>
                     <th scope="col">Email</th>
                     <th scope="col">Pembimbing</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($mahasiswas as $mahasiswa)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $mahasiswa->nama }}</td>
-                        {{-- <td>{{ $mahasiswa->pembimbing->name }}</td> --}}
-                        <td>{{ $mahasiswa->npm }}</td>
-                        <td>{{ $mahasiswa->kelas }}</td>
-                        <td>{{ $mahasiswa->email }}</td>
-                        <td>{{ $mahasiswa->pembimbing->nama }}</td>
-                        <td>
-                            <a href="/dashboard/logbooks/mhs/{{ $mahasiswa->npm }}" class="badge bg-info"><span
-                                    data-feather="eye"></span></a>
-                            <a href="/dashboard/mahasiswas/{{ $mahasiswa->slug }}/edit" class="badge bg-warning"><span
-                                    data-feather="edit"></span></a>
+                        <td class="py-4">{{ $loop->iteration }}</td>
+                        <td class="py-4">{{ $mahasiswa->nama }}</td>
+                        {{-- <td class="py-4">{{ $mahasiswa->pembimbing->name }}</td> --}}
+                        <td class="py-4">{{ $mahasiswa->npm }}</td>
+                        <td class="py-4">{{ $mahasiswa->kelas }}</td>
+                        <td class="py-4">{{ $mahasiswa->email }}</td>
+                        <td class="py-4">{{ $mahasiswa->pembimbing->nama }}</td>
+                        <td class="pt-3 text-center">
+                            <a href="/dashboard/logbooks/mhs/{{ Crypt::encryptString($mahasiswa->npm) }}"
+                                class="btn btn-success btn-sm">List
+                                Mahasiswa</a>
+                            <a href="/dashboard/mahasiswas/{{ $mahasiswa->slug }}/edit"
+                                class="btn btn-warning btn-sm">Ubah</a>
                             <form action="/dashboard/mahasiswas/{{ $mahasiswa->slug }}" method="POST" class="d-inline">
                                 @method('delete')
                                 @csrf
-                                <button class="badge bg-danger border-0" onclick="return confirm('Are you sure?')"><span
-                                        data-feather="x-circle"></span></button>
+                                <button class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Are you sure?')">Hapus</button>
                             </form>
                         </td>
                     </tr>

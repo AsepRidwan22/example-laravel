@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Logbook;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt;
 
 class DashboardLogbookController extends Controller
 {
@@ -16,7 +18,8 @@ class DashboardLogbookController extends Controller
     public function index()
     {
         return view('dashboard.logbooks.index', [
-            'logbooks' => logbook::where('user_id', auth()->user()->id)->get()
+            'logbooks' => logbook::where('user_id', auth()->user()->id)->get(),
+            'mahasiswa' => Mahasiswa::where('user_id', auth()->user()->id)->value('nama')
         ]);
     }
 
@@ -27,9 +30,21 @@ class DashboardLogbookController extends Controller
      */
     public function create()
     {
+        // return view('dashboard.logbooks.create', [
+        //     // 'users' => User::where('roles', 'mahasiswa')->get()->last(),
+        //     // 'dosens' => Dosen::all()
+        //     // 'logbook' => logbook::all()
+        // ]);
+    }
+
+    public function bodyUpdate($id, Logbook $logbook)
+    {
+        // dd($id);
         return view('dashboard.logbooks.create', [
             // 'users' => User::where('roles', 'mahasiswa')->get()->last(),
             // 'dosens' => Dosen::all()
+            'logbook_id' => $id,
+            'logbook' => $logbook
         ]);
     }
 
@@ -41,16 +56,37 @@ class DashboardLogbookController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
-        $validateData = $request->validate(
+        // dd(Mahasiswa::where('user_id', auth()->user()->id)->value('id'));
+        // $validateData = $request->validate(
+        //     [
+        //         'date' => 'required',
+        //         'body' => 'required',
+        //         'mahasiswa_id' => 'required',
+        //         'user_id' => 'required'
+        //     ]
+        // );
+
+        // $validateData['date'] = Carbon::now()->isoFormat('dddd, D MMMM Y');
+        // $validateData['mahasiswa_id'] = Mahasiswa::where('user_id', auth()->user()->id)->value('id');
+        // $validateData['user_id'] = auth()->user()->id;
+        // Logbook::where('id', 13)->update($validateData);
+        // Logbook::where
+    }
+
+    public function createUpdate(Request $request)
+    {
+        // dd(Crypt::encryptString($request->id));
+        $validateData =
             [
-                'date' => 'required',
                 'body' => 'required',
                 'mahasiswa_id' => 'required',
                 'user_id' => 'required'
-            ]
-        );
-
+            ];
+        $validateData['body'] = $request->body;
+        $validateData['mahasiswa_id'] = Mahasiswa::where('user_id', auth()->user()->id)->value('id');
+        $validateData['user_id'] = auth()->user()->id;
+        Logbook::where('id', Crypt::decryptString($request->id))->update($validateData);
+        return redirect('/dashboard/logbooks')->with('success', 'post has been updated!');
         // Logbook::where
     }
 
@@ -69,9 +105,12 @@ class DashboardLogbookController extends Controller
 
     public function showLogbookMhs($npm)
     {
-        // dd($id);
+        // dd(Mahasiswa::value('npm'));
+        // dd(Crypt::decryptString($npm));
+        $decryptedNpm = Crypt::decryptString($npm);
         return view('dashboard.logbooks.index', [
-            "logbooks" => Logbook::where('mahasiswa_id', Mahasiswa::where('npm', $npm)->pluck('id'))->get()
+            "logbooks" => Logbook::where('mahasiswa_id', Mahasiswa::where('npm', $decryptedNpm)->pluck('id'))->get(),
+            "mahasiswa" => mahasiswa::where('npm', $decryptedNpm)->value('nama')
         ]);
     }
 
@@ -90,6 +129,7 @@ class DashboardLogbookController extends Controller
      */
     public function edit(Logbook $logbook)
     {
+        // dd($logbook->id);
         return view('dashboard.logbooks.edit', [
             'logbook' => $logbook
         ]);
@@ -104,12 +144,19 @@ class DashboardLogbookController extends Controller
      */
     public function update(Request $request, Logbook $logbook)
     {
-        // dd(Mahasiswa::where('id', $logbook->mahasiswa_id)->pluck('npm'));
-        $validateData = ['isHadir' => 'required'];
+        // dd(Carbon::now()->addDays(3)->isoFormat('dddd, D MMMM Y'));
+        // dd(Carbon::now()->isoFormat('dddd, D MMMM Y'));
+
+        // if (Carbon::now()->isoFormat('dddd, D MMMM Y') === Carbon::now()->addDays(3)->isoFormat('dddd, D MMMM Y')) {
+        //     dd($request->isHadir);
+        // }
+
+        $validateData = ['isHadir' => 'required', 'date' => 'required',];
         $validateData['isHadir'] = $request->isHadir;
+        $validateData['date'] = Carbon::now()->isoFormat('dddd, D MMMM Y');
         logbook::where('id', $logbook->id)->update($validateData);
         $npm = Mahasiswa::where('id', $logbook->mahasiswa_id)->value('npm');
-        return redirect('/dashboard/logbooks/mhs/' . $npm)->with('success', 'post has been updated!');
+        return redirect('/dashboard/logbooks/mhs/' . Crypt::encryptString($npm))->with('success', 'post has been updated!');
     }
 
     /**

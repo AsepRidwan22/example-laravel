@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom">
-        <h1 class="h2">Logbook {{ auth()->user()->name }}</h1>
+        <h1 class="h2">Logbook {{ $mahasiswa }}</h1>
     </div>
 
     @if (session()->has('success'))
@@ -26,20 +26,28 @@
             <div class="card-body">
                 {{-- <h5 class="card-title">Special title treatment</h5>
                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
-                @if ($logbook->date)
-                    <h6 class="card-text">{{ $logbook->date }}</h6>
+                <h6 class="card-text">{{ $logbook->date }}</h6>
+                @if ($logbook->body != null)
                     <div class="card-body bg-light border rounded mb-2">
                         <p class="card-text">
-                            {{ $logbook->body }}
+                            {!! $logbook->body !!}
                         </p>
                     </div>
+                @else
+                    @can('koordinator')
+                        <div class="alert alert-secondary text-center" role="alert">
+                            Logbook belum terisi
+                        </div>
+                    @endcan
                 @endif
                 @can('mahasiswa')
-                    <div class="text-center">
-                        <a href="/dashboard/logbooks/create"
-                            class="btn btn-primary @if ($logbook->isHadir == false) disabled @endif">Lengkapi
-                            Logbook </a>
-                    </div>
+                    @if ($logbook->body == null)
+                        <div class="text-center">
+                            <a href="/dashboard/logbooks/{{ Crypt::encryptString($logbook->id) }}/create"
+                                class="btn btn-primary @if ($logbook->isHadir == false) disabled @endif">Lengkapi
+                                Logbook </a>
+                        </div>
+                    @endif
                 @endcan
                 @can('dosen')
                     @if ($logbook->isHadir == 1)
