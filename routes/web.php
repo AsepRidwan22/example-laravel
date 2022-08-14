@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardMahasiswaController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\DashboardDosenController;
 use App\Http\Controllers\DashboardLogbookController;
+use App\Http\Controllers\DashboardProgresController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,5 +100,9 @@ Route::resource('/dashboard/logbooks', DashboardLogbookController::class)->middl
 Route::get('/dashboard/logbooks/{logbooks:id}/create', [DashboardLogbookController::class, 'bodyUpdate'])->middleware('auth');
 Route::put('/dashboard/logbook/create/{logbooks:id}', [DashboardLogbookController::class, 'createUpdate'])->middleware('auth');
 Route::get('/dashboard/logbooks/mhs/{mahasiswa:npm}', [DashboardLogbookController::class, 'showLogbookMhs']);
+
+
+Route::resource('/dashboard/progres', DashboardProgresController::class)->middleware('auth');
+Route::get('/dashboard/mahasiswas/progres/{user:user_id}', [DashboardProgresController::class, 'showProgresMhs']);
 
 // Route::get('/dashboard/logbooks/{logbooks:user_id}', DashboardLogbookController::class, 'show2')->middleware('auth');

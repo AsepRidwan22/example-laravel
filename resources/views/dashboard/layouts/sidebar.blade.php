@@ -17,7 +17,13 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('dashboard/logbooks*') ? 'active' : '' }}" href="/dashboard/logbooks">
                         <span data-feather="file-text" class="align-text-bottom"></span>
-                        Logbook
+                        Logbook Bimbingan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/progres*') ? 'active' : '' }}" href="/dashboard/progres">
+                        <span data-feather="file-text" class="align-text-bottom"></span>
+                        Progres
                     </a>
                 </li>
             @endcan

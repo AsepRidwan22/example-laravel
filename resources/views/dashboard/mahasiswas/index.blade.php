@@ -25,10 +25,10 @@
             <thead>
                 <tr>
                     <th scope="col">No.</th>
-                    <th scope="col">Nama</th>
                     <th scope="col">NPM</th>
-                    <th scope="col">Kelas</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Nama</th>
+                    {{-- <th scope="col">Kelas</th>
+                    <th scope="col">Email</th> --}}
                     <th scope="col">Pembimbing</th>
                     <th scope="col" class="text-center">Action</th>
                 </tr>
@@ -37,16 +37,18 @@
                 @foreach ($mahasiswas as $mahasiswa)
                     <tr>
                         <td class="py-4">{{ $loop->iteration }}</td>
+                        <td class="py-4">{{ $mahasiswa->npm }}</td>
                         <td class="py-4">{{ $mahasiswa->nama }}</td>
                         {{-- <td class="py-4">{{ $mahasiswa->pembimbing->name }}</td> --}}
-                        <td class="py-4">{{ $mahasiswa->npm }}</td>
-                        <td class="py-4">{{ $mahasiswa->kelas }}</td>
-                        <td class="py-4">{{ $mahasiswa->email }}</td>
+                        {{-- <td class="py-4">{{ $mahasiswa->kelas }}</td>
+                        <td class="py-4">{{ $mahasiswa->email }}</td> --}}
                         <td class="py-4">{{ $mahasiswa->pembimbing->nama }}</td>
                         <td class="pt-3 text-center">
                             <a href="/dashboard/logbooks/mhs/{{ Crypt::encryptString($mahasiswa->npm) }}"
                                 class="btn btn-success btn-sm">List
-                                Mahasiswa</a>
+                                Logbook</a>
+                            <a href="/dashboard/mahasiswas/progres/{{ $mahasiswa->user_id }}"
+                                class="btn btn-primary btn-sm">Progres</a>
                             <a href="/dashboard/mahasiswas/{{ $mahasiswa->slug }}/edit"
                                 class="btn btn-warning btn-sm">Ubah</a>
                             <form action="/dashboard/mahasiswas/{{ $mahasiswa->slug }}" method="POST" class="d-inline">

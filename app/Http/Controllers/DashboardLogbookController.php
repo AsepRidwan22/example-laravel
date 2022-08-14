@@ -107,6 +107,7 @@ class DashboardLogbookController extends Controller
     {
         // dd(Mahasiswa::value('npm'));
         // dd(Crypt::decryptString($npm));
+
         $decryptedNpm = Crypt::decryptString($npm);
         return view('dashboard.logbooks.index', [
             "logbooks" => Logbook::where('mahasiswa_id', Mahasiswa::where('npm', $decryptedNpm)->pluck('id'))->get(),
@@ -153,7 +154,7 @@ class DashboardLogbookController extends Controller
 
         $validateData = ['isHadir' => 'required', 'date' => 'required',];
         $validateData['isHadir'] = $request->isHadir;
-        $validateData['date'] = Carbon::now()->isoFormat('dddd, D MMMM Y');
+        $validateData['date'] = Carbon::now();
         logbook::where('id', $logbook->id)->update($validateData);
         $npm = Mahasiswa::where('id', $logbook->mahasiswa_id)->value('npm');
         return redirect('/dashboard/logbooks/mhs/' . Crypt::encryptString($npm))->with('success', 'post has been updated!');

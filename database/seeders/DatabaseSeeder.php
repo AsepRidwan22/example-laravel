@@ -10,6 +10,7 @@ use App\Models\Mahasiswa;
 use App\Models\Dosen;
 use App\Models\Logbook;
 use App\Models\Post;
+use App\Models\Progres;
 use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
@@ -126,5 +127,12 @@ class DatabaseSeeder extends Seeder
 
         Logbook::factory(7)->create(['user_id' => 1, 'mahasiswa_id' => 1]);
         Logbook::factory(7)->create(['user_id' => 2, 'mahasiswa_id' => 2]);
+        Progres::factory(4)->create(['user_id' => 1]);
+        Progres::factory(4)->create(['user_id' => 2]);
+        // Progres::update([
+        //     'id' => 1,
+        //     'laporan' => 'https://drive.google.com/file/d/1u7r8o8iQtzg3x4iTzJOfkPTA2nXUo0Cm/view',
+        //     'user_id' => '1'
+        // ]);
     }
 }

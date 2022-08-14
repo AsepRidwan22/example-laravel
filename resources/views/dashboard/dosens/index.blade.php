@@ -18,7 +18,7 @@
     @endif
 
     <div class="table-responsive col-lg-12">
-        <a href="/dashboard/register" class="btn btn-primary">Tambah Dosen</a>
+        <a href="/dashboard/dosens/create" class="btn btn-primary">Tambah Dosen</a>
         <table class="table table-striped table-sm">
             <thead>
                 <tr>

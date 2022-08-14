@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('logbooks', function (Blueprint $table) {
             $table->id();
-            $table->string('date')->nullable();
+            $table->timestamp('date')->nullable();
             $table->text('body')->nullable();
             $table->foreignId('mahasiswa_id')->nullable();
             $table->foreignId('user_id')->nullable();

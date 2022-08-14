@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,5 +20,12 @@ class Logbook extends Model
     public function akun()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function getDateAttribute()
+    {
+        if ($this->attributes['date'] != null) {
+            return Carbon::parse($this->attributes['date'])->translatedFormat('l, d F Y');
+        }
     }
 }

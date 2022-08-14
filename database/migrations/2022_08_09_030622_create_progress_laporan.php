@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('progress_laporan', function (Blueprint $table) {
+        Schema::create('progres', function (Blueprint $table) {
             $table->id();
             $table->string('laporan')->nullable();
             $table->foreignId('user_id')->nullable();

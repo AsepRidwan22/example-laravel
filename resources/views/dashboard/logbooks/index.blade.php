@@ -18,15 +18,13 @@
     @endif
     @foreach ($logbooks as $logbook)
         <div class="card mb-4 col-lg-8">
-            {{-- <div class="card-header">
-                <h5>
-                    Logbook {{ $loop->iteration }}
-                </h5>
-            </div> --}}
+            <div class="card-header d-flex justify-content-between">
+                <h6 class="card-text">Bimbingan {{ $loop->iteration }}</h6>
+                <h6 class="card-text">{{ $logbook->date }}</h6>
+            </div>
             <div class="card-body">
                 {{-- <h5 class="card-title">Special title treatment</h5>
                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
-                <h6 class="card-text">{{ $logbook->date }}</h6>
                 @if ($logbook->body != null)
                     <div class="card-body bg-light border rounded mb-2">
                         <p class="card-text">
