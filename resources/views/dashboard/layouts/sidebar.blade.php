@@ -26,6 +26,12 @@
                         Progres
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/dosens*') ? 'active' : '' }}" href="/dashboard/dosens">
+                        <span data-feather="file-text" class="align-text-bottom"></span>
+                        Dosen
+                    </a>
+                </li>
             @endcan
             @can('dosen')
                 <li class="nav-item">

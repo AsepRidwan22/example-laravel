@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsGuest
+class IsPembimbingLapangan
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class IsGuest
      */
     public function handle(Request $request, Closure $next)
     {
-
-        if (auth()->user()->roles != 'guest') {
+        if (auth()->guest() || auth()->user()->roles !== 'pembimbing lapangan') {
+            abort(403);
         }
         return $next($request);
     }

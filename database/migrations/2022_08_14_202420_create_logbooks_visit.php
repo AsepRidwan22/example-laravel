@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mahasiswas', function (Blueprint $table) {
+        Schema::create('logbooks_visit', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('dosen_id');
-            $table->string('nama');
-            $table->string('npm');
-            $table->string('kelas');
-            $table->string('email');
+            $table->timestamp('date')->nullable();
+            $table->text('body')->nullable();
+            $table->foreignId('mahasiswa_id')->nullable();
+            $table->foreignId('user_id')->nullable();
+            $table->boolean('isHadir')->nullable();
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mahasiswas');
+        Schema::dropIfExists('logbooks_visit');
     }
 };

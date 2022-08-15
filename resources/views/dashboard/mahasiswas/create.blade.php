@@ -9,11 +9,11 @@
 
         <form method="POST" action="/dashboard/mahasiswas" class="mb-5" enctype="multipart/form-data">
             @csrf
-            <input id="user_id" type="hidden" name="user_id" required value="{{ $users->id }}">
+            {{-- <input id="user_id" type="hidden" name="user_id" required value="{{ $users->id }}"> --}}
             <div class="mb-3">
                 <label for="npm" class="form-label">NPM</label>
-                <input type="text" class="form-control @error('npm') is-invalid @enderror" id="npm" name="npm"
-                    value="{{ old('npm') }}" required autofocus>
+                <input type="number" class="form-control @error('npm') is-invalid @enderror" id="npm" name="npm"
+                    value="{{ old('npm') }}" required autofocus autocomplete="off">
                 @error('npm')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -23,7 +23,7 @@
             <div class="mb-3">
                 <label for="nama" class="form-label">Nama</label>
                 <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama"
-                    value="{{ old('nama') }}" required>
+                    value="{{ old('nama') }}" required autocomplete="off">
                 @error('nama')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -33,7 +33,7 @@
             <div class="mb-3">
                 <label for="kelas" class="form-label">Kelas</label>
                 <input type="text" class="form-control @error('kelas') is-invalid @enderror" id="kelas"
-                    name="kelas" value="{{ old('kelas') }}" required>
+                    name="kelas" value="{{ old('kelas') }}" required autocomplete="off">
                 @error('kelas')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -43,7 +43,7 @@
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="text" class="form-control @error('email') is-invalid @enderror" id="email"
-                    name="email" value="{{ old('email') }}" required>
+                    name="email" value="{{ old('email') }}" required autocomplete="off">
                 @error('email')
                     <div class="invalid-feedback">
                         {{ $message }}

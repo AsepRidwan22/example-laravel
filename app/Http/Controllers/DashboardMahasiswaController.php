@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Mahasiswa;
 use App\Models\User;
 use App\Models\Dosen;
 use App\Models\Logbook;
+use App\Models\Mahasiswa;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class DashboardMahasiswaController extends Controller
 {
@@ -39,7 +41,6 @@ class DashboardMahasiswaController extends Controller
     public function create()
     {
         return view('dashboard.mahasiswas.create', [
-            'users' => User::where('roles', 'mahasiswa')->get()->last(),
             'dosens' => Dosen::all()
         ]);
     }
@@ -52,24 +53,42 @@ class DashboardMahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        // dd($request->validate());
 
-        $validateData = $request->validate([
+        $rules = [
             'nama' => 'required|max:255',
-            'npm' => 'required',
+            'npm' => 'required|unique:mahasiswas',
             'kelas' => 'required',
-            'email' => 'required|email',
-            'user_id' => 'required',
+            'email' => 'required|email:dns|unique:mahasiswas',
             'dosen_id' => 'required'
-        ]);
+        ];
+
+
+        $validateData = $request->validate($rules);
+
+        $validated = Validator::make($validateData, $rules);
+
+        // if ($validated->fails()) {
+        //     $failed = $validated->failed();
+        // } else {
+        //     User::create([
+        //         'username' => $request->npm,
+        //         'roles' => 'mahasiswa',
+        //         'password' => bcrypt('12345')
+        //     ]);
+        // }
+
+        if ($validated->passes()) {
+            User::create([
+                'username' => $request->npm,
+                'roles' => 'mahasiswa',
+                'password' => bcrypt('12345')
+            ]);
+        }
+
+        $validateData['user_id'] = User::where('roles', 'mahasiswa')->get()->last()->id;
 
         Mahasiswa::create($validateData);
-
-        User::create([
-            'username' => $request->npm,
-            'roles' => 'mahasiswa',
-            'password' => bcrypt('12345')
-        ]);
 
         $user = User::where('roles', 'mahasiswa')->get()->last();
         $mahasiswa = Mahasiswa::all()->last();

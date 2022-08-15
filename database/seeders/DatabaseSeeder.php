@@ -129,6 +129,7 @@ class DatabaseSeeder extends Seeder
         Logbook::factory(7)->create(['user_id' => 2, 'mahasiswa_id' => 2]);
         Progres::factory(4)->create(['user_id' => 1]);
         Progres::factory(4)->create(['user_id' => 2]);
+
         // Progres::update([
         //     'id' => 1,
         //     'laporan' => 'https://drive.google.com/file/d/1u7r8o8iQtzg3x4iTzJOfkPTA2nXUo0Cm/view',
