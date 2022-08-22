@@ -11,8 +11,8 @@
             @csrf
             <div class="mb-3">
                 <label for="nidn" class="form-label">NIDN</label>
-                <input type="disabled" class="form-control @error('nidn') is-invalid @enderror" id="nidn"
-                    name="nidn" required autofocus>
+                <input value="{{ old('nidn') }}" type="disabled" class="form-control @error('nidn') is-invalid @enderror"
+                    id="nidn" name="nidn" required autofocus>
                 @error('nidn')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -39,7 +39,6 @@
                     </div>
                 @enderror
             </div>
-            <input id="user_id" type="hidden" name="user_id" required value="{{ $users->id }}">
             <button type="submit" class="btn btn-primary">Create Post</button>
         </form>
     </div>

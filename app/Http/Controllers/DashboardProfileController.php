@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Progres;
+use App\Models\Dosen;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 
-class DashboardProgresController extends Controller
+class DashboardProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,16 +15,15 @@ class DashboardProgresController extends Controller
      */
     public function index()
     {
-        return view('dashboard.progres.index', [
-            'progress' => Progres::where('user_id', auth()->user()->id)->get()
-        ]);
-    }
-
-    public function showProgresMhs($id)
-    {
-        return view('dashboard.progres.index', [
-            'progress' => Progres::where('user_id', $id)->get()
-        ]);
+        if (auth()->user()->roles === 'mahasiswa') {
+            return view('dashboard.profile.index', [
+                'profiles' => Mahasiswa::where('user_id', auth()->user()->id)->get()
+            ]);
+        } else if (auth()->user()->roles === 'dosen') {
+            return view('dashboard.profile.index', [
+                'profiles' => Dosen::where('user_id', auth()->user()->id)->get()
+            ]);
+        }
     }
 
     /**
@@ -67,11 +66,7 @@ class DashboardProgresController extends Controller
      */
     public function edit($id)
     {
-        // dd($id);
-        $decryptedId = Crypt::decryptString($id);
-        return view('dashboard.progres.edit', [
-            'idProgres' => Progres::where('id', $decryptedId)->value('id')
-        ]);
+        //
     }
 
     /**
@@ -81,14 +76,9 @@ class DashboardProgresController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        // dd($request->id);
-        $validateData = ['laporan' => 'required', 'user_id' => 'required'];
-        $validateData['laporan'] = $request->laporan;
-        $validateData['user_id'] = auth()->user()->id;
-        Progres::where('id', $request->id)->update($validateData);
-        return redirect('/dashboard/progres')->with('success', 'New post has been added!');
+        //
     }
 
     /**

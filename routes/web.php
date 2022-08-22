@@ -5,12 +5,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\DashboardPostController;
-use App\Http\Controllers\DashboardMahasiswaController;
 use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\DashboardDosenController;
 use App\Http\Controllers\DashboardLogbookController;
+use App\Http\Controllers\DashboardProfileController;
 use App\Http\Controllers\DashboardProgresController;
+use App\Http\Controllers\DashboardProposalController;
+use App\Http\Controllers\DashboardMahasiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +93,7 @@ Route::get('/dashboard', function () {
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
 
 Route::resource('/dashboard/mahasiswas', DashboardMahasiswaController::class)->middleware(['is_koordinator']);
+Route::get('dashboard/bimbingans', [DashboardMahasiswaController::class, 'bimbingan'])->middleware(['is_koordinator']);
 
 Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('is_koordinator');
 
@@ -104,5 +107,8 @@ Route::get('/dashboard/logbooks/mhs/{mahasiswa:npm}', [DashboardLogbookControlle
 
 Route::resource('/dashboard/progres', DashboardProgresController::class)->middleware('auth');
 Route::get('/dashboard/mahasiswas/progres/{user:user_id}', [DashboardProgresController::class, 'showProgresMhs']);
+Route::resource('/dashboard/profile', DashboardProfileController::class);
+
+Route::resource('/dashboard/proposals', DashboardProposalController::class)->middleware('auth');
 
 // Route::get('/dashboard/logbooks/{logbooks:user_id}', DashboardLogbookController::class, 'show2')->middleware('auth');

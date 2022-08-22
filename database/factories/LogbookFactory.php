@@ -17,8 +17,6 @@ class LogbookFactory extends Factory
      */
     public function definition()
     {
-        return [
-            'isHadir' => false,
-        ];
+        return [];
     }
 }

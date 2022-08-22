@@ -11,6 +11,7 @@ use App\Models\Dosen;
 use App\Models\Logbook;
 use App\Models\Post;
 use App\Models\Progres;
+use App\Models\Proposal;
 use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
@@ -82,6 +83,7 @@ class DatabaseSeeder extends Seeder
         Mahasiswa::create([
             'nama' => 'Asep Ridwan',
             'npm' => '5520119040',
+            'noHp' => '083107113661',
             'kelas' => 'IF B 2019',
             'email' => 'udin@gmail.com',
             'user_id' => '1',
@@ -91,6 +93,7 @@ class DatabaseSeeder extends Seeder
         Mahasiswa::create([
             'nama' => 'udin saparudin',
             'npm' => '5520119041',
+            'noHp' => '081808613971',
             'kelas' => 'IF B 2019',
             'email' => 'asep@gmail.com',
             'user_id' => '2',
@@ -127,8 +130,12 @@ class DatabaseSeeder extends Seeder
 
         Logbook::factory(7)->create(['user_id' => 1, 'mahasiswa_id' => 1]);
         Logbook::factory(7)->create(['user_id' => 2, 'mahasiswa_id' => 2]);
-        Progres::factory(4)->create(['user_id' => 1]);
-        Progres::factory(4)->create(['user_id' => 2]);
+        Progres::factory(4)->create(['user_id' => 1, 'mahasiswa_id' => 1]);
+        Progres::factory(4)->create(['user_id' => 2, 'mahasiswa_id' => 2]);
+
+        Proposal::create(['judul' => 'baca buku', 'proposal' => 'baca buku', 'isAccProposal' => false, 'pesan' => 'langka bimbingan', 'user_id' => 1, 'mahasiswa_id' => 1]);
+        Proposal::create(['judul' => 'baca buku', 'proposal' => 'baca buku', 'isAccProposal' => false, 'pesan' => 'langka bimbingan', 'user_id' => 2, 'mahasiswa_id' => 2]);
+
 
         // Progres::update([
         //     'id' => 1,

@@ -8,6 +8,7 @@ use App\Models\Logbook;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Progres;
 use Illuminate\Support\Facades\Validator;
 
 class DashboardMahasiswaController extends Controller
@@ -19,17 +20,35 @@ class DashboardMahasiswaController extends Controller
      */
     public function index()
     {
+        // dd(Logbook::where('isHadir', 1)->where('mahasiswa_id', 2)->count());
         if (auth()->user()->roles === 'koordinator') {
             return view('dashboard.mahasiswas.index', [
-                'mahasiswas' => Mahasiswa::all()
+                'mahasiswas' => Mahasiswa::all(),
+                'logbooks' => Logbook::where('isHadir', 1)->get(),
+                'progres' => Progres::whereNotNull('laporan')->get()
             ]);
         } else if (auth()->user()->roles === 'dosen') {
             $id = Dosen::where('user_id', auth()->user()->id)->pluck('id');
             return view('dashboard.mahasiswas.index', [
                 'mahasiswas' => Mahasiswa::where('dosen_id', $id)->get()
             ]);
-        } else {
-            return 'sia lain sasaha';
+        }
+    }
+
+    public function bimbingan()
+    {
+        // dd(Logbook::where('isHadir', 1)->where('mahasiswa_id', 2)->count());
+        if (auth()->user()->roles === 'koordinator') {
+            return view('dashboard.mahasiswas.bimbingan', [
+                'mahasiswas' => Mahasiswa::all(),
+                'logbooks' => Logbook::where('isHadir', 1)->get(),
+                'progres' => Progres::whereNotNull('laporan')->get()
+            ]);
+        } else if (auth()->user()->roles === 'dosen') {
+            $id = Dosen::where('user_id', auth()->user()->id)->pluck('id');
+            return view('dashboard.mahasiswas.index', [
+                'mahasiswas' => Mahasiswa::where('dosen_id', $id)->get()
+            ]);
         }
     }
 
@@ -59,6 +78,7 @@ class DashboardMahasiswaController extends Controller
             'nama' => 'required|max:255',
             'npm' => 'required|unique:mahasiswas',
             'kelas' => 'required',
+            'noHp' => 'required',
             'email' => 'required|email:dns|unique:mahasiswas',
             'dosen_id' => 'required'
         ];
@@ -68,17 +88,7 @@ class DashboardMahasiswaController extends Controller
 
         $validated = Validator::make($validateData, $rules);
 
-        // if ($validated->fails()) {
-        //     $failed = $validated->failed();
-        // } else {
-        //     User::create([
-        //         'username' => $request->npm,
-        //         'roles' => 'mahasiswa',
-        //         'password' => bcrypt('12345')
-        //     ]);
-        // }
-
-        if ($validated->passes()) {
+        if (!$validated->fails()) {
             User::create([
                 'username' => $request->npm,
                 'roles' => 'mahasiswa',
@@ -86,15 +96,16 @@ class DashboardMahasiswaController extends Controller
             ]);
         }
 
-        $validateData['user_id'] = User::where('roles', 'mahasiswa')->get()->last()->id;
+        $validateData['user_id'] = User::where('username', $request->npm)->value('id');
 
         Mahasiswa::create($validateData);
 
-        $user = User::where('roles', 'mahasiswa')->get()->last();
-        $mahasiswa = Mahasiswa::all()->last();
+        $user = User::where('username', $request->npm)->value('id');
+        $mahasiswa = Mahasiswa::where('npm', $request->npm)->value('id');
 
         Logbook::factory(7)->create(['user_id' => $user, 'mahasiswa_id' => $mahasiswa]);
-        return redirect('/dashboard/mahasiswas')->with('success', 'New post has been added!');
+        Progres::factory(4)->create(['user_id' => $user, 'mahasiswa_id' => $mahasiswa]);
+        return redirect('/dashboard/mahasiswas')->with('success', 'Mahasiswa beserta akunnya sudah ditambahkan!');
     }
 
     /**
@@ -105,6 +116,7 @@ class DashboardMahasiswaController extends Controller
      */
     public function show($id)
     {
+        //
     }
 
     /**

@@ -13,8 +13,8 @@
             <div class="mb-3">
                 <label for="isHadir" class="form-label @error('isHadir') is-invalid @enderror">Paraf</label>
                 <select class="form-select" name="isHadir" required>
-                    <option value="1" selected>Hadir</option>
-                    <option value="0">Tidak Hadir</option>
+                    <option value="1" selected>Terverifikasi</option>
+                    <option value="0">Tidak Terverifikasi</option>
                 </select>
                 @error('isHadir')
                     <div class="invalid-feedback">
@@ -22,7 +22,7 @@
                     </div>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-primary">Hadir</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 @endsection

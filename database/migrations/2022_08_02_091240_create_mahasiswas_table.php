@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('dosen_id');
             $table->string('nama');
             $table->string('npm');
+            $table->string('noHp');
             $table->string('kelas');
             $table->string('email');
             $table->timestamps();

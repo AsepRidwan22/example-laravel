@@ -41,6 +41,16 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <label for="noHp" class="form-label">Nomor HP</label>
+                <input type="text" class="form-control @error('noHp') is-invalid @enderror" id="noHp" name="noHp"
+                    value="{{ old('noHp') }}" required autocomplete="off">
+                @error('noHp')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="text" class="form-control @error('email') is-invalid @enderror" id="email"
                     name="email" value="{{ old('email') }}" required autocomplete="off">
@@ -67,7 +77,7 @@
                     </div>
                 @enderror
             </div>
-            <button type="submit" class="btn btn-primary">Create Post</button>
+            <button type="submit" class="btn btn-primary">Tambah Mahasiswa</button>
         </form>
     </div>
 @endsection

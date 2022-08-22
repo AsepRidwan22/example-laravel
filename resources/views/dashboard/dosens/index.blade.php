@@ -18,7 +18,9 @@
     @endif
 
     <div class="table-responsive col-lg-12">
-        <a href="/dashboard/dosens/create" class="btn btn-primary">Tambah Dosen</a>
+        @can('koordinator')
+            <a href="/dashboard/dosens/create" class="btn btn-primary">Tambah Dosen</a>
+        @endcan
         <table class="table table-striped table-sm">
             <thead>
                 <tr>

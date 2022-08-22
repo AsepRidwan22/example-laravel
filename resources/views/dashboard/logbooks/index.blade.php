@@ -19,8 +19,23 @@
     @foreach ($logbooks as $logbook)
         <div class="card mb-4 col-lg-8">
             <div class="card-header d-flex justify-content-between">
-                <h6 class="card-text">Bimbingan {{ $loop->iteration }}</h6>
-                <h6 class="card-text">{{ $logbook->date }}</h6>
+                @if ($logbook->date == null)
+                    <h6 class="card-text">Bimbingan {{ $loop->iteration }}</h6>
+                @else
+                    <h6 class="card-text">{{ $logbook->date }}</h6>
+                @endif
+
+
+                @if ($logbook->isHadir == true)
+                    <h6 class="card-text">Verified</h6>
+                @elseif ($logbook->isHadir === null)
+                    @if ($logbook->body != null)
+                        <h6 class="card-text">Menunggu Verifikasi</h6>
+                    @endif
+                @else
+                    <h6 class="card-text">Belum Terverifikasi</h6>
+                @endif
+
             </div>
             <div class="card-body">
                 {{-- <h5 class="card-title">Special title treatment</h5>
@@ -42,19 +57,25 @@
                     @if ($logbook->body == null)
                         <div class="text-center">
                             <a href="/dashboard/logbooks/{{ Crypt::encryptString($logbook->id) }}/create"
-                                class="btn btn-primary @if ($logbook->isHadir == false) disabled @endif">Lengkapi
-                                Logbook </a>
+                                class="btn btn-primary">Lengkapi
+                                Logbook</a>
+                        </div>
+                    @endif
+
+                    @if ($logbook->isHadir === 0)
+                        <div class="text-center">
+                            <a href="/dashboard/logbooks/{{ Crypt::encryptString($logbook->id) }}/create"
+                                class="btn btn-primary">Ubah
+                                Logbook</a>
                         </div>
                     @endif
                 @endcan
                 @can('dosen')
-                    @if ($logbook->isHadir == 1)
+                    @if ($logbook->isHadir === null)
                         <div class="text-center mt-3">
-                            <a href="/dashboard/logbooks/{{ $logbook->id }}/edit" class="btn btn-success">Hadir</a>
-                        </div>
-                    @else
-                        <div class="text-center mt-3">
-                            <a href="/dashboard/logbooks/{{ $logbook->id }}/edit" class="btn btn-primary">Buat Paraf</a>
+                            <a href="/dashboard/logbooks/{{ $logbook->id }}/edit"
+                                class="btn btn-primary @if ($logbook->body === null) disabled @endif">Verifikasi
+                                Logbook</a>
                         </div>
                     @endif
                 @endcan

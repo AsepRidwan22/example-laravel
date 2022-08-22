@@ -6,6 +6,7 @@ use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DashboardDosenController extends Controller
 {
@@ -16,10 +17,20 @@ class DashboardDosenController extends Controller
      */
     public function index()
     {
-        return view('dashboard.dosens.index', [
-            'dosens' => Dosen::all(),
-            'mahasiswas' => Mahasiswa::all()
-        ]);
+        if (auth()->user()->roles === 'koordinator') {
+            return view('dashboard.dosens.index', [
+                'dosens' => Dosen::all(),
+                'mahasiswas' => Mahasiswa::all()
+            ]);
+        } else if (auth()->user()->roles === 'mahasiswa') {
+
+            $dosen_id = Mahasiswa::where('id', auth()->user()->id)->value('dosen_id');
+
+            return view('dashboard.dosens.index', [
+                'dosens' => Dosen::where('id', $dosen_id)->get(),
+                'mahasiswas' => Mahasiswa::all()
+            ]);
+        }
     }
 
     /**
@@ -44,14 +55,28 @@ class DashboardDosenController extends Controller
     {
         // dd($request);
 
-        $validateData = $request->validate([
+        $rules = [
             'nama' => 'required|max:255',
-            'nidn' => 'required',
-            'email' => 'required|email',
-            'user_id' => 'required'
-        ]);
+            'nidn' => 'required|unique:dosens',
+            'email' => 'required|email:dns|unique:dosens',
+        ];
+
+        $validateData = $request->validate($rules);
+
+        $validated = Validator::make($validateData, $rules);
+
+        if (!$validated->fails()) {
+            User::create([
+                'username' => $request->nidn,
+                'roles' => 'dosen',
+                'password' => bcrypt('12345')
+            ]);
+        }
+
+        $validateData['user_id'] = User::where('username', $request->nidn)->value('id');
 
         Dosen::create($validateData);
+
         return redirect('/dashboard/dosens')->with('success', 'New post has been added!');
     }
 

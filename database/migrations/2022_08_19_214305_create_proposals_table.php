@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('progres', function (Blueprint $table) {
+        Schema::create('proposals', function (Blueprint $table) {
             $table->id();
-            $table->string('laporan')->nullable();
-            $table->foreignId('user_id')->nullable();
+            $table->string('judul');
+            $table->string('proposal');
+            $table->boolean('isAccProposal');
+            $table->string('pesan')->nullable();
             $table->foreignId('mahasiswa_id')->nullable();
+            $table->foreignId('user_id')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('progress_laporan');
+        Schema::dropIfExists('proposals');
     }
 };

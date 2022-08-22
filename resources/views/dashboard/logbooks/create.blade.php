@@ -16,7 +16,20 @@
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
                 <input type="hidden" name="id" value="{{ $logbook_id }}">
-                <input id="body" type="hidden" name="body" required value="{{ old('body') }}">
+
+                @if ($logbookIsHadir !== null)
+                    <input type="hidden" name="isHadir" value="true">
+                @endif
+                <div class="mb-3">
+                    <input type="date" class="form-control @error('date') is-invalid @enderror" id="date"
+                        name="date" value="{{ old('date', $logbookDate) }}" required autocomplete="off">
+                    @error('date')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <input id="body" type="hidden" name="body" required value="{{ old('body', $logbookBody) }}">
                 <trix-editor input="body"></trix-editor>
             </div>
             <button type="submit" class="btn btn-primary">Buat Logbook</button>

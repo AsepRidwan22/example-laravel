@@ -13,11 +13,17 @@
                     My Post
                 </a>
             </li> --}}
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('dashboard/profile*') ? 'active' : '' }}" href="/dashboard/profile">
+                    <span data-feather="file-text" class="align-text-bottom"></span>
+                    Profile
+                </a>
+            </li>
             @can('mahasiswa')
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('dashboard/logbooks*') ? 'active' : '' }}" href="/dashboard/logbooks">
                         <span data-feather="file-text" class="align-text-bottom"></span>
-                        Logbook Bimbingan
+                        Logbook
                     </a>
                 </li>
                 <li class="nav-item">
@@ -29,7 +35,7 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('dashboard/dosens*') ? 'active' : '' }}" href="/dashboard/dosens">
                         <span data-feather="file-text" class="align-text-bottom"></span>
-                        Dosen
+                        Dosen Pembimbing
                     </a>
                 </li>
             @endcan
@@ -39,6 +45,22 @@
                         href="/dashboard/mahasiswas">
                         <span data-feather="file-text" class="align-text-bottom"></span>
                         Mahasiswa
+                    </a>
+                </li>
+            @endcan
+            @can('koordinator')
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/proposals*') ? 'active' : '' }}"
+                        href="/dashboard/proposals">
+                        <span data-feather="file-text" class="align-text-bottom"></span>
+                        Proposal
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/bimbingans*') ? 'active' : '' }}"
+                        href="/dashboard/bimbingans">
+                        <span data-feather="file-text" class="align-text-bottom"></span>
+                        Bimbingan
                     </a>
                 </li>
             @endcan

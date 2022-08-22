@@ -6,13 +6,13 @@
     </div>
 
     @if (session()->has('success'))
-        <div class="alert alert-success col-lg-8" role="alert">
+        <div class="alert alert-success col-lg-12" role="alert">
             {{ session('success') }}
         </div>
     @endif
 
     @if (session()->has('danger'))
-        <div class="alert alert-danger col-lg-8" role="alert">
+        <div class="alert alert-danger col-lg-12" role="alert">
             {{ session('danger') }}
         </div>
     @endif
@@ -27,8 +27,9 @@
                     <th scope="col">No.</th>
                     <th scope="col">NPM</th>
                     <th scope="col">Nama</th>
-                    {{-- <th scope="col">Kelas</th>
-                    <th scope="col">Email</th> --}}
+                    <th scope="col">Kelas</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Nomor HP</th>
                     <th scope="col">Pembimbing</th>
                     <th scope="col" class="text-center">Action</th>
                 </tr>
@@ -39,28 +40,37 @@
                         <td class="py-4">{{ $loop->iteration }}</td>
                         <td class="py-4">{{ $mahasiswa->npm }}</td>
                         <td class="py-4">{{ $mahasiswa->nama }}</td>
-                        {{-- <td class="py-4">{{ $mahasiswa->pembimbing->name }}</td> --}}
-                        {{-- <td class="py-4">{{ $mahasiswa->kelas }}</td>
-                        <td class="py-4">{{ $mahasiswa->email }}</td> --}}
+                        <td class="py-4">{{ $mahasiswa->kelas }}</td>
+                        <td class="py-4">{{ $mahasiswa->email }}</td>
+                        <td class="py-4">{{ $mahasiswa->noHp }}</td>
                         <td class="py-4">{{ $mahasiswa->pembimbing->nama }}</td>
                         <td class="pt-3 text-center">
-                            <a href="/dashboard/logbooks/mhs/{{ Crypt::encryptString($mahasiswa->npm) }}"
-                                class="btn btn-success btn-sm">List
-                                Logbook</a>
-                            <a href="/dashboard/mahasiswas/progres/{{ $mahasiswa->user_id }}"
-                                class="btn btn-primary btn-sm">Progres</a>
+                            @can('dosen')
+                                <a href="/dashboard/logbooks/mhs/{{ Crypt::encryptString($mahasiswa->npm) }}"
+                                    class="btn btn-success btn-sm">List
+                                    Logbook</a>
+                                <a href="/dashboard/mahasiswas/progres/{{ $mahasiswa->user_id }}"
+                                    class="btn btn-primary btn-sm">Progres</a>
+                            @endcan
                             <a href="/dashboard/mahasiswas/{{ $mahasiswa->slug }}/edit"
-                                class="btn btn-warning btn-sm">Ubah</a>
-                            <form action="/dashboard/mahasiswas/{{ $mahasiswa->slug }}" method="POST" class="d-inline">
-                                @method('delete')
-                                @csrf
-                                <button class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Are you sure?')">Hapus</button>
-                            </form>
+                                class="btn btn-primary btn-sm">Lihat</a>
+                            @can('koordinator')
+                                <a href="/dashboard/mahasiswas/{{ $mahasiswa->slug }}/edit"
+                                    class="btn btn-warning btn-sm">Ubah</a>
+                                <form action="/dashboard/mahasiswas/{{ $mahasiswa->slug }}" method="POST" class="d-inline">
+                                    @method('delete')
+                                    @csrf
+                                    <button class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Are you sure?')">Hapus</button>
+                                </form>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+    <script>
+        $('.alert').alert()
+    </script>
 @endsection
