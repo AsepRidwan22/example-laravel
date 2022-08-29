@@ -24,8 +24,8 @@
                     <th scope="col">No.</th>
                     <th scope="col">NPM</th>
                     <th scope="col">Nama</th>
+                    {{-- <th scope="col">Instansi</th> --}}
                     <th scope="col">Judul</th>
-                    <th scope="col">Proposal</th>
                     <th scope="col" class="text-center">Action</th>
                 </tr>
             </thead>
@@ -33,20 +33,31 @@
                 @foreach ($proposals as $proposal)
                     <tr>
                         <td class="py-4">{{ $loop->iteration }}</td>
-                        <td class="py-4">{{ $proposal->akun->npm }}</td>
-                        <td class="py-4">{{ $proposal->akun->nama }}</td>
+                        <td class="py-4">{{ $proposal->mahasiswa->npm }}</td>
+                        <td class="py-4">{{ $proposal->mahasiswa->nama }}</td>
+                        {{-- <td class="py-4">{{ $proposal->instansi->namaInstansi }}</td> --}}
                         <td class="py-4">{{ $proposal->judul }}</td>
-                        <td class="py-4">{{ $proposal->proposal }}</td>
                         <td class="pt-3 text-center">
-                            <a href="/dashboard/proposals/{{ $proposal->slug }}/edit" class="btn btn-primary btn-sm">ACC
-                                Proposal</a>
+                            @if ($proposal->isAccProposal === null)
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                    data-target="#formACC{{ $proposal->id }}">
+                                    Acc Proposal
+                                </button>
+                            @elseif ($proposal->isAccProposal == 0)
+                                <button type="button" class="btn btn-danger btn-sm">
+                                    Rejected
+                                </button>
+                            @else
+                                <button type="button" class="btn btn-success btn-sm">
+                                    Accepted
+                                </button>
+                            @endif
                         </td>
                     </tr>
+                    @include('dashboard.proposal.accept')
+                    @include('dashboard.proposal.revisi')
                 @endforeach
             </tbody>
         </table>
     </div>
-    <script>
-        $('.alert').alert()
-    </script>
 @endsection

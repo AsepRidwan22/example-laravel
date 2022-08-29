@@ -9,10 +9,15 @@ class Proposal extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $with = ['akun'];
+    protected $with = ['mahasiswa'];
 
-    public function akun()
+    public function mahasiswa()
     {
         return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id');
+    }
+
+    public function instansi()
+    {
+        return $this->belongsTo(Instansi::class, 'instansi_id');
     }
 }

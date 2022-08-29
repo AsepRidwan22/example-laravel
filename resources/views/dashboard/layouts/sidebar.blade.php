@@ -21,6 +21,13 @@
             </li>
             @can('mahasiswa')
                 <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/proposals/create') ? 'active' : '' }}"
+                        href="/dashboard/proposals/create">
+                        <span data-feather="file-text" class="align-text-bottom"></span>
+                        Proposal
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link {{ Request::is('dashboard/logbooks*') ? 'active' : '' }}" href="/dashboard/logbooks">
                         <span data-feather="file-text" class="align-text-bottom"></span>
                         Logbook
@@ -36,6 +43,13 @@
                     <a class="nav-link {{ Request::is('dashboard/dosens*') ? 'active' : '' }}" href="/dashboard/dosens">
                         <span data-feather="file-text" class="align-text-bottom"></span>
                         Dosen Pembimbing
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/seminars/create*') ? 'active' : '' }}"
+                        href="/dashboard/seminars/create">
+                        <span data-feather="file-text" class="align-text-bottom"></span>
+                        Seminar
                     </a>
                 </li>
             @endcan
@@ -61,6 +75,13 @@
                         href="/dashboard/bimbingans">
                         <span data-feather="file-text" class="align-text-bottom"></span>
                         Bimbingan
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/seminars*') ? 'active' : '' }}"
+                        href="/dashboard/seminars">
+                        <span data-feather="file-text" class="align-text-bottom"></span>
+                        Seminar
                     </a>
                 </li>
             @endcan

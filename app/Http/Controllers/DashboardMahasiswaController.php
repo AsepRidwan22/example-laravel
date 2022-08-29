@@ -9,7 +9,9 @@ use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Progres;
+use App\Models\Proposal;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\Console\Output\NullOutput;
 
 class DashboardMahasiswaController extends Controller
 {
@@ -35,12 +37,25 @@ class DashboardMahasiswaController extends Controller
         }
     }
 
+    public function dashboard()
+    {
+        // dd(Mahasiswa::where('id', 1)->get()->count());
+        return view('dashboard.index', [
+            'mahasiswas' => Mahasiswa::count(),
+            // 'pengajuanProposals' => Proposal::where('isAccProposal', 0)->orWhere('isAccProposal',  null)->count(),
+            'pengajuanProposals' => Proposal::whereNotNull('judul')->count(),
+            'accProposals' => Proposal::where('isAccProposal', 1)->count(),
+            'bimbingans' => Logbook::whereNotNull('body')->get()->unique('mahasiswa_id')->count(),
+            // 'finishBimbingan' => Logbook::
+        ]);
+    }
+
     public function bimbingan()
     {
         // dd(Logbook::where('isHadir', 1)->where('mahasiswa_id', 2)->count());
         if (auth()->user()->roles === 'koordinator') {
             return view('dashboard.mahasiswas.bimbingan', [
-                'mahasiswas' => Mahasiswa::all(),
+                'mahasiswas' => Mahasiswa::whereNotNull('dosen_id')->get(),
                 'logbooks' => Logbook::where('isHadir', 1)->get(),
                 'progres' => Progres::whereNotNull('laporan')->get()
             ]);
@@ -79,8 +94,7 @@ class DashboardMahasiswaController extends Controller
             'npm' => 'required|unique:mahasiswas',
             'kelas' => 'required',
             'noHp' => 'required',
-            'email' => 'required|email:dns|unique:mahasiswas',
-            'dosen_id' => 'required'
+            'email' => 'required|email|unique:mahasiswas'
         ];
 
 

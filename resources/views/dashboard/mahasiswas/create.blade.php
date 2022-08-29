@@ -60,23 +60,6 @@
                     </div>
                 @enderror
             </div>
-            <div class="mb-3">
-                <label for="dosen" class="form-label @error('dosen') is-invalid @enderror">Dosen Pembimbing</label>
-                <select class="form-select" name="dosen_id" required>
-                    @foreach ($dosens as $dosen)
-                        @if (old('dosen_id') == $dosen->id)
-                            <option value="{{ $dosen->id }}" selected>{{ $dosen->nama }}</option>
-                        @else
-                            <option value="{{ $dosen->id }}">{{ $dosen->nama }}</option>
-                        @endif
-                    @endforeach
-                </select>
-                @error('category')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
             <button type="submit" class="btn btn-primary">Tambah Mahasiswa</button>
         </form>
     </div>

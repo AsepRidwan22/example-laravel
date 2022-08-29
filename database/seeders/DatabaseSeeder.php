@@ -86,8 +86,7 @@ class DatabaseSeeder extends Seeder
             'noHp' => '083107113661',
             'kelas' => 'IF B 2019',
             'email' => 'udin@gmail.com',
-            'user_id' => '1',
-            'dosen_id' => '1'
+            'user_id' => '1'
         ]);
 
         Mahasiswa::create([
@@ -96,8 +95,7 @@ class DatabaseSeeder extends Seeder
             'noHp' => '081808613971',
             'kelas' => 'IF B 2019',
             'email' => 'asep@gmail.com',
-            'user_id' => '2',
-            'dosen_id' => '2'
+            'user_id' => '2'
         ]);
 
         Dosen::create([
@@ -133,8 +131,8 @@ class DatabaseSeeder extends Seeder
         Progres::factory(4)->create(['user_id' => 1, 'mahasiswa_id' => 1]);
         Progres::factory(4)->create(['user_id' => 2, 'mahasiswa_id' => 2]);
 
-        Proposal::create(['judul' => 'baca buku', 'proposal' => 'baca buku', 'isAccProposal' => false, 'pesan' => 'langka bimbingan', 'user_id' => 1, 'mahasiswa_id' => 1]);
-        Proposal::create(['judul' => 'baca buku', 'proposal' => 'baca buku', 'isAccProposal' => false, 'pesan' => 'langka bimbingan', 'user_id' => 2, 'mahasiswa_id' => 2]);
+        // Proposal::create(['judul' => 'baca buku', 'proposal' => 'baca buku', 'user_id' => 1, 'mahasiswa_id' => 1]);
+        // Proposal::create(['judul' => 'baca buku', 'proposal' => 'baca buku', 'user_id' => 2, 'mahasiswa_id' => 2]);
 
 
         // Progres::update([

@@ -12,12 +12,12 @@
     @endif
 
     @if (session()->has('danger'))
-        <div class="alert alert-danger col-lg-8" role="alert">
+        <div class="alert alert-danger col-lg-12" role="alert">
             {{ session('danger') }}
         </div>
     @endif
 
-    <div class="table-responsive col-lg-8">
+    <div class="table-responsive col-lg-12">
         <table class="table table-striped table-sm">
             <thead>
                 <tr>
@@ -45,7 +45,11 @@
                                 <td class="py-4">BAB {{ $progres->where('mahasiswa_id', $mahasiswa->id)->count() + 1 }}</td>
                             @endif
                         @endcan
-                        <td class="py-4">{{ $mahasiswa->pembimbing->nama }}</td>
+                        @if ($mahasiswa->dosen_id === null)
+                            <td class="py-4">Belum Punya</td>
+                        @else
+                            <td class="py-4">{{ $mahasiswa->pembimbing->nama }}</td>
+                        @endif
                     </tr>
                 @endforeach
             </tbody>

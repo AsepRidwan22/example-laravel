@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('mahasiswas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('dosen_id');
+            $table->foreignId('dosen_id')->nullable();
+            $table->foreignId('instansi_id')->nullable();
             $table->string('nama');
             $table->string('npm');
             $table->string('noHp');

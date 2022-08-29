@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardDosenController;
 use App\Http\Controllers\DashboardLogbookController;
 use App\Http\Controllers\DashboardProfileController;
 use App\Http\Controllers\DashboardProgresController;
+use App\Http\Controllers\DashboardSeminarController;
 use App\Http\Controllers\DashboardProposalController;
 use App\Http\Controllers\DashboardMahasiswaController;
 
@@ -94,6 +95,7 @@ Route::resource('/dashboard/posts', DashboardPostController::class)->middleware(
 
 Route::resource('/dashboard/mahasiswas', DashboardMahasiswaController::class)->middleware(['is_koordinator']);
 Route::get('dashboard/bimbingans', [DashboardMahasiswaController::class, 'bimbingan'])->middleware(['is_koordinator']);
+Route::get('dashboard', [DashboardMahasiswaController::class, 'dashboard'])->middleware(['auth']);
 
 Route::resource('/dashboard/categories', AdminCategoryController::class)->except('show')->middleware('is_koordinator');
 
@@ -110,5 +112,10 @@ Route::get('/dashboard/mahasiswas/progres/{user:user_id}', [DashboardProgresCont
 Route::resource('/dashboard/profile', DashboardProfileController::class);
 
 Route::resource('/dashboard/proposals', DashboardProposalController::class)->middleware('auth');
+Route::put('/dashboard/proposals/accept/{proposal:mahasiswa_id}', [DashboardProposalController::class, 'accept'])->middleware('auth');
+Route::put('/dashboard/proposals/edit-proposal/{id}', [DashboardProposalController::class, 'revisi'])->middleware('auth');
+
+Route::resource('/dashboard/seminars', DashboardSeminarController::class)->middleware('auth');
+
 
 // Route::get('/dashboard/logbooks/{logbooks:user_id}', DashboardLogbookController::class, 'show2')->middleware('auth');

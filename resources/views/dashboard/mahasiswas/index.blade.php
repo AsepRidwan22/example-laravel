@@ -43,7 +43,11 @@
                         <td class="py-4">{{ $mahasiswa->kelas }}</td>
                         <td class="py-4">{{ $mahasiswa->email }}</td>
                         <td class="py-4">{{ $mahasiswa->noHp }}</td>
-                        <td class="py-4">{{ $mahasiswa->pembimbing->nama }}</td>
+                        @if ($mahasiswa->dosen_id === null)
+                            <td class="py-4">Belum Punya</td>
+                        @else
+                            <td class="py-4">{{ $mahasiswa->pembimbing->nama }}</td>
+                        @endif
                         <td class="pt-3 text-center">
                             @can('dosen')
                                 <a href="/dashboard/logbooks/mhs/{{ Crypt::encryptString($mahasiswa->npm) }}"
