@@ -30,7 +30,7 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="namaPembimbing" class="form-label">Nama Pembimbing</label>
+                    <label for="namaPembimbing" class="form-label">Nama Pembimbing Lapangan</label>
                     <input type="text" class="form-control @error('namaPembimbing') is-invalid @enderror"
                         id="namaPembimbing" name="namaPembimbing" value="{{ old('namaPembimbing') }}" required
                         autocomplete="off">
@@ -92,7 +92,39 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="proposal" class="form-label @error('proposal') is-invalid @enderror">Post proposal</label>
+                    <label for="namaInstansi" class="form-label">Nama Instansi</label>
+                    <input type="text" class="form-control @error('namaInstansi') is-invalid @enderror" id="namaInstansi"
+                        name="namaInstansi" value="{{ old('namaInstansi') }}" required autocomplete="off">
+                    @error('namaInstansi')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="namaPembimbing" class="form-label">Nama Pembimbing Lapangan</label>
+                    <input type="text" class="form-control @error('namaPembimbing') is-invalid @enderror"
+                        id="namaPembimbing" name="namaPembimbing" value="{{ old('namaPembimbing') }}" required
+                        autocomplete="off">
+                    @error('namaPembimbing')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="noHp" class="form-label">No Handphone</label>
+                    <input type="text" class="form-control @error('noHp') is-invalid @enderror" id="noHp"
+                        name="noHp" value="{{ old('noHp') }}" required autocomplete="off">
+                    @error('noHp')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <label for="proposal" class="form-label @error('proposal') is-invalid @enderror">Post
+                        proposal</label>
                     <input class="form-control @error('proposal') is invalid @enderror" type="file" id="proposal"
                         name="proposal" onchange="previewproposal()">
                     @error('proposal')

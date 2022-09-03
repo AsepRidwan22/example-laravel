@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Logbook;
 use App\Models\Mahasiswa;
+use App\Models\Proposal;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
@@ -17,7 +18,10 @@ class DashboardLogbookController extends Controller
      */
     public function index()
     {
+        // dd(logbook::where('user_id', auth()->user()->id)->whereNotNull('body')->count());
         return view('dashboard.logbooks.index', [
+            'checkProposal' => Proposal::where('mahasiswa_id', auth()->user()->id)->value('isAccProposal'),
+            // 'logbookCount' => logbook::where('user_id', auth()->user()->id)->whereNotNull('body')->count(),
             'logbooks' => logbook::where('user_id', auth()->user()->id)->get(),
             'mahasiswa' => Mahasiswa::where('user_id', auth()->user()->id)->value('nama')
         ]);
@@ -79,7 +83,7 @@ class DashboardLogbookController extends Controller
 
     public function createUpdate(Request $request)
     {
-        // dd($request);
+        // dd($request->id);
         $validateData =
             [
                 'body' => 'required',
@@ -97,7 +101,7 @@ class DashboardLogbookController extends Controller
         $validateData['mahasiswa_id'] = Mahasiswa::where('user_id', auth()->user()->id)->value('id');
         $validateData['user_id'] = auth()->user()->id;
 
-        Logbook::where('id', Crypt::decryptString($request->id))->update($validateData);
+        Logbook::where('id', $request->id)->update($validateData);
         return redirect('/dashboard/logbooks')->with('success', 'post has been updated!');
         // Logbook::where
     }

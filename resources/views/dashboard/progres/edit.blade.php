@@ -1,32 +1,40 @@
-@extends('dashboard.layouts.main')
+<form method="POST" action="/dashboard/progres/{{ $progres->id }}" class="mb-3" enctype="multipart/form-data">
+    <div class="modal fade" id="progresCreate{{ $progres->id }}" tabindex="-1" role="dialog"
+        aria-labelledby="formAcceptTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formAcceptTitle">Form Tambah Progres</h5>
+                </div>
+                <div class="modal-body">
+                    @csrf
+                    @method('put')
+                    <div class="mb-3">
+                        {{-- <label for="body" class="form-label">body</label> --}}
+                        {{-- @error('body')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                            <input type="hidden" name="id" value="{{ $logbook->id }}">
 
-@section('container')
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Progres</h1>
-    </div>
-
-    <div class="col-lg-8">
-        <form method="POST" action="/dashboard/progres/{{ $idProgres }}" class="mb-5" enctype="multipart/form-data">
-            @csrf
-            @method('put')
-            {{-- <div class="mb-3">
-                @error('laporan')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-                <input type="hidden" name="id" value="{{ $idProgres }}">
-                <input id="laporan" type="hidden" name="laporan" required value="{{ old('laporan') }}">
-                <trix-editor input="laporan"></trix-editor>
-            </div>
-            <button type="submit" class="btn btn-primary">Buat Progres</button> --}}
-
-            <div class="input-group mb-3">
-                <input type="hidden" name="id" value="{{ $idProgres }}">
-                <input type="text" id="laporan" name="laporan" class="form-control" placeholder="Add URL"
-                    aria-label="Add URL" aria-describedby="basic-addon2" autocomplete="off" required>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">Submit</button>
+                            @if ($logbook->isHadir !== null)
+                                <input type="hidden" name="isHadir" value="true">
+                            @endif --}}
+                        <div class="mb-3">
+                            <label for="laporan" class="form-label @error('laporan') is-invalid @enderror">Post
+                                Laporan</label>
+                            <input type="hidden" name="id" value="{{ $progres->id }}">
+                            <input class="form-control @error('laporan') is invalid @enderror" type="file"
+                                id="laporan" name="laporan" onchange="previewlaporan()">
+                            @error('laporan')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Buat Laporan</button>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
-@endsection
+</form>

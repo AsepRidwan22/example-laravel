@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Progres;
+use App\Models\Proposal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -16,6 +17,7 @@ class DashboardProgresController extends Controller
     public function index()
     {
         return view('dashboard.progres.index', [
+            'checkProposal' => Proposal::where('mahasiswa_id', auth()->user()->id)->value('isAccProposal'),
             'progress' => Progres::where('user_id', auth()->user()->id)->get()
         ]);
     }

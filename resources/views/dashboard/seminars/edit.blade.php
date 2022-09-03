@@ -2,24 +2,29 @@
 
 @section('container')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Ajukan Seminar</h1>
+        <h1 class="h2">Buat Jadwal Seminar</h1>
     </div>
 
     <div class="col-lg-8">
-        <form method="POST" action="/dashboard/seminars" class="mb-5" enctype="multipart/form-data">
+        <form method="POST" action="/dashboard/seminars/addjadwal/{{ $seminar->id }}" class="mb-5"
+            enctype="multipart/form-data">
             @csrf
+            @method('put')
             <div class="mt-3">
-                {{-- <label for="laporan" class="form-label">Laporan</label> --}}
-                {{-- <input type="text" class="form-control @error('laporan') is-invalid @enderror" id="laporan"
-                    name="laporan" value="{{ old('laporan') }}" required autocomplete="off">
-                @error('laporan')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror --}}
-                <a href="{{ asset('storage/') }}" class="btn btn-success btn-sm mb-3" target="_blank">Lihat
-                    Laporan</a>
+                <a href="{{ asset('storage/' . $seminar->laporan) }}" class="btn btn-success btn-sm" target="_blank">Lihat
+                    Proposal</a>
             </div>
+            <label for="dosen" class="form-label @error('dosen') is-invalid @enderror">Dosen
+                Penguji</label>
+            <select class="form-select" name="dosen_id" required>
+                @foreach ($dosens as $dosen)
+                    @if (old('dosen_id') == $dosen->id)
+                        <option value="{{ $dosen->id }}" selected>{{ $dosen->nama }}</option>
+                    @else
+                        <option value="{{ $dosen->id }}">{{ $dosen->nama }}</option>
+                    @endif
+                @endforeach
+            </select>
             <div class="mb-3">
                 <label for="tanggal" class="form-label">Tanggal</label>
                 <input type="date" class="form-control @error('tanggal') is-invalid @enderror" id="tanggal"
@@ -34,11 +39,9 @@
                 <label for="waktu" class="form-label">Waktu</label>
                 <div class="d-flex justify-content-start">
                     <label class="timex" for="appt"></label>
-                    <input type="time" class="timez" id="appt" name="appt" min="09:00" max="18:00"
-                        required>
+                    <input type="time" class="timez" id="appt" name="mulai" required>
                     <p class="pt-3 mx-3"> s/d </p>
-                    <input type="time" class="timez" id="appt" name="appt" min="09:00" max="18:00"
-                        required>
+                    <input type="time" class="timez" id="appt" name="akhir" required>
                 </div>
             </div>
             <div class="mb-3">

@@ -22,7 +22,9 @@
             <thead>
                 <tr>
                     <th scope="col">No.</th>
-                    <th scope="col">Laporan</th>
+                    <th scope="col">NPM</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Penguji</th>
                     <th scope="col">Tanggal</th>
                     <th scope="col">Waktu</th>
                     <th scope="col">Ruangan</th>
@@ -33,7 +35,13 @@
                 @foreach ($seminars as $seminar)
                     <tr>
                         <td class="py-4">{{ $loop->iteration }}</td>
-                        <td class="py-4">{{ $seminar->laporan }}</td>
+                        <td class="py-4">{{ $seminar->mahasiswa->npm }}</td>
+                        <td class="py-4">{{ $seminar->mahasiswa->nama }}</td>
+                        @if ($seminar->dosen_id != null)
+                            <td class="py-4">{{ $seminar->penguji->nama }}</td>
+                        @else
+                            <td class="py-4">Belum Diisi</td>
+                        @endif
                         @if ($seminar->tanggal != null)
                             <td class="py-4">{{ $seminar->tanggal }}</td>
                             <td class="py-4">{{ $seminar->waktu }}</td>
@@ -45,7 +53,8 @@
                         @endif
 
                         <td class="pt-3 text-center">
-                            <a href="/dashboard/seminars/create" class="btn btn-primary btn-sm">Buat Jadwal</a>
+                            <a href="/dashboard/seminars/{{ $seminar->id }}/addjadwal" class="btn btn-success btn-sm">Buat
+                                Jadwal</a>
                         </td>
                     </tr>
                 @endforeach

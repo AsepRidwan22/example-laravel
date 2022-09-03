@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('seminars', function (Blueprint $table) {
+        Schema::create('penilaians', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('mahasiswa_id');
-            $table->string('laporan');
-            $table->foreignId('dosen_id')->nullable();
-            $table->timestamp('tanggal')->nullable();
-            $table->string('waktu')->nullable();
-            $table->string('ruangan')->nullable();
+            $table->float('nilai_pembimbing')->nullable();
+            $table->float('nilai_penguji')->nullable();
+            $table->float('nilai_instansi')->nullable();
+            // $table->foreignId('pembimbing_id')->nullable();
+            // $table->foreignId('penguji_id')->nullable();
+            // $table->foreignId('instansi_id')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('seminars');
+        Schema::dropIfExists('penilaians');
     }
 };

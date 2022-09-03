@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('dosen_id')->nullable();
+            $table->foreignId('penguji_id')->nullable();
             $table->foreignId('instansi_id')->nullable();
             $table->string('nama');
             $table->string('npm');

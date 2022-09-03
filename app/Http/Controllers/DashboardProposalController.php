@@ -141,6 +141,16 @@ class DashboardProposalController extends Controller
     public function revisi(Request $request, $id)
     {
         // dd($id);
+        $validateInstansi = $request->validate([
+            'namaInstansi' => 'required|max:255',
+            'namaPembimbing' => 'required|max:255',
+            'noHp' => 'required'
+        ]);
+
+        if (Instansi::where('noHp', $request->noHp)->value('id') === null) {
+            Instansi::create($validateInstansi);
+        }
+
         $validateData = $request->validate([
             'judul' => 'required|max:255',
             'proposal' => 'required|mimes:pdf|max:2048'

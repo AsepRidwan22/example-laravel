@@ -21,4 +21,9 @@ class Mahasiswa extends Model
     {
         return $this->belongsTo(Dosen::class, 'dosen_id');
     }
+
+    public function penguji()
+    {
+        return $this->belongsTo(Dosen::class, 'penguji_id');
+    }
 }

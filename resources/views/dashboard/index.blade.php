@@ -16,7 +16,8 @@
             <div class="card bg-c-green order-card">
                 <div class="card-block">
                     <h6 class="m-b-20">Mengajukan Proposal</h6>
-                    <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>{{ $pengajuanProposals }}</span></h2>
+                    <h2 class="text-right"><i
+                            class="fa fa-rocket f-left"></i><span>{{ $pengajuanProposals - $accProposals }}</span></h2>
                     <p class="m-b-0">Selesai Proposal<span class="f-right">{{ $accProposals }}</span></p>
                 </div>
             </div>
