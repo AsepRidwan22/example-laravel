@@ -18,10 +18,10 @@ class DashboardLogbookController extends Controller
      */
     public function index()
     {
-        // dd(logbook::where('user_id', auth()->user()->id)->whereNotNull('body')->count());
+        // dd(Proposal::where('mahasiswa_id', auth()->user()->id)->value('isAccProposal'));
+
         return view('dashboard.logbooks.index', [
-            'checkProposal' => Proposal::where('mahasiswa_id', auth()->user()->id)->value('isAccProposal'),
-            // 'logbookCount' => logbook::where('user_id', auth()->user()->id)->whereNotNull('body')->count(),
+            'checkProposal' => Proposal::where('user_id', auth()->user()->id)->value('isAccProposal'),
             'logbooks' => logbook::where('user_id', auth()->user()->id)->get(),
             'mahasiswa' => Mahasiswa::where('user_id', auth()->user()->id)->value('nama')
         ]);
@@ -126,6 +126,7 @@ class DashboardLogbookController extends Controller
 
         $decryptedNpm = Crypt::decryptString($npm);
         return view('dashboard.logbooks.index', [
+            'checkProposal' => 1,
             "logbooks" => Logbook::where('mahasiswa_id', Mahasiswa::where('npm', $decryptedNpm)->pluck('id'))->get(),
             "mahasiswa" => mahasiswa::where('npm', $decryptedNpm)->value('nama')
         ]);

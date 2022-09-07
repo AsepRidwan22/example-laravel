@@ -28,6 +28,11 @@
             </form>
         </div>
     @else
-        <p>Silahkan lengkapi dulu logbook dan progres laporannya</p>
+        <div class=" image d-flex flex-column justify-content-center align-items-center">
+            <img src="https://img.freepik.com/premium-vector/file-found-illustration-with-confused-people-holding-big-magnifier-search-no-result_258153-336.jpg?w=2000"
+                class="mx-auto d-block" alt="Profile Dosen" width="500" style="object-fit: cover;">
+            <p class="idd">Belum bisa mengajukan seminar!</p>
+            <p>Silahkan lengkapi dulu logbook dan progres laporannya</p>
+        </div>
     @endif
 @endsection

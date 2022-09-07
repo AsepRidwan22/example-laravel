@@ -16,48 +16,56 @@
             {{ session('danger') }}
         </div>
     @endif
-
-    <div class="table-responsive col-lg-12">
-        <table class="table table-striped table-sm">
-            <thead>
-                <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">NPM</th>
-                    <th scope="col">Nama</th>
-                    {{-- <th scope="col">Instansi</th> --}}
-                    <th scope="col">Judul</th>
-                    <th scope="col" class="text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($proposals as $proposal)
+    @if ($nullProposal == null)
+        <div class=" image d-flex flex-column justify-content-center align-items-center">
+            <img src="{{ asset('storage/icon/noData.png') }}" class="mx-auto d-block" alt="Profile Dosen" width="400"
+                style="object-fit: cover;">
+            <p class="idd">Proposal masih kosong!</p>
+            <p>Silahkan tunggu Mahasiswa mengajukan proposal terlebih dahulu</p>
+        </div>
+    @else
+        <div class="table-responsive col-lg-12">
+            <table class="table table-striped table-sm">
+                <thead>
                     <tr>
-                        <td class="py-4">{{ $loop->iteration }}</td>
-                        <td class="py-4">{{ $proposal->mahasiswa->npm }}</td>
-                        <td class="py-4">{{ $proposal->mahasiswa->nama }}</td>
-                        {{-- <td class="py-4">{{ $proposal->instansi->namaInstansi }}</td> --}}
-                        <td class="py-4">{{ $proposal->judul }}</td>
-                        <td class="pt-3 text-center">
-                            @if ($proposal->isAccProposal === null)
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                    data-target="#formACC{{ $proposal->id }}">
-                                    Acc Proposal
-                                </button>
-                            @elseif ($proposal->isAccProposal == 0)
-                                <button type="button" class="btn btn-danger btn-sm">
-                                    Rejected
-                                </button>
-                            @else
-                                <button type="button" class="btn btn-success btn-sm">
-                                    Accepted
-                                </button>
-                            @endif
-                        </td>
+                        <th scope="col">No.</th>
+                        <th scope="col">NPM</th>
+                        <th scope="col">Nama</th>
+                        {{-- <th scope="col">Instansi</th> --}}
+                        <th scope="col">Judul</th>
+                        <th scope="col" class="text-center">Action</th>
                     </tr>
-                    @include('dashboard.proposal.accept')
-                    @include('dashboard.proposal.revisi')
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    @foreach ($proposals as $proposal)
+                        <tr>
+                            <td class="py-4">{{ $loop->iteration }}</td>
+                            <td class="py-4">{{ $proposal->mahasiswa->npm }}</td>
+                            <td class="py-4">{{ $proposal->mahasiswa->nama }}</td>
+                            {{-- <td class="py-4">{{ $proposal->instansi->namaInstansi }}</td> --}}
+                            <td class="py-4">{{ $proposal->judul }}</td>
+                            <td class="pt-3 text-center">
+                                @if ($proposal->isAccProposal === null)
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                        data-target="#formACC{{ $proposal->id }}">
+                                        Acc Proposal
+                                    </button>
+                                @elseif ($proposal->isAccProposal == 0)
+                                    <button type="button" class="btn btn-danger btn-sm">
+                                        Rejected
+                                    </button>
+                                @else
+                                    <button type="button" class="btn btn-success btn-sm">
+                                        Accepted
+                                    </button>
+                                @endif
+                            </td>
+                        </tr>
+                        @include('dashboard.proposal.accept')
+                        @include('dashboard.proposal.revisi')
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    @endif
 @endsection

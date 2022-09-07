@@ -55,6 +55,7 @@ class DashboardMahasiswaController extends Controller
         // dd(Logbook::where('isHadir', 1)->where('mahasiswa_id', 2)->count());
         if (auth()->user()->roles === 'koordinator') {
             return view('dashboard.mahasiswas.bimbingan', [
+                'nullMahasiswa' => Mahasiswa::whereNotNull('dosen_id')->first('id'),
                 'mahasiswas' => Mahasiswa::whereNotNull('dosen_id')->get(),
                 'logbooks' => Logbook::where('isHadir', 1)->get(),
                 'progres' => Progres::whereNotNull('laporan')->get()
@@ -94,8 +95,13 @@ class DashboardMahasiswaController extends Controller
             'npm' => 'required|unique:mahasiswas',
             'kelas' => 'required',
             'noHp' => 'required',
-            'email' => 'required|email|unique:mahasiswas'
+            'email' => 'required|email|unique:mahasiswas',
+            'photo' => 'image|file|max:1024'
         ];
+
+        if ($request->file('photo')) {
+            $validateData['photo'] = $request->file('photo')->store('profile-photos');
+        }
 
 
         $validateData = $request->validate($rules);

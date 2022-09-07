@@ -18,7 +18,7 @@
             </div>
         @endif
 
-        <div class="table-responsive col-lg-12">
+        <div class="table-responsive col-lg-8">
             <a href="/dashboard/dosens/create" class="btn btn-primary">Tambah Dosen</a>
             <table class="table table-striped table-sm">
                 <thead>
@@ -58,6 +58,53 @@
         </div>
     @endcan
     @can('mahasiswa')
-        <p>Propil Dosen Pembimbing</p>
+        @if ($pembimbing === null)
+            <div class=" image d-flex flex-column justify-content-center align-items-center">
+                <img src="https://img.freepik.com/premium-vector/file-found-illustration-with-confused-people-holding-big-magnifier-search-no-result_258153-336.jpg?w=2000"
+                    class="mx-auto d-block" alt="Profile Dosen" width="500" style="object-fit: cover;">
+                <p class="idd">Belum punya Pembimbing!</p>
+                <p>Silahkan ajukan proposal terlebih dahulu</p>
+            </div>
+        @else
+            <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+                <div class="cardz p-4">
+                    @foreach ($dosens as $dosen)
+                        <div class=" image d-flex flex-column justify-content-center align-items-center">
+                            @if ($dosen->photo != null)
+                                <img src="{{ asset('storage/' . $dosen->photo) }}" class="rounded-circle mx-auto d-block"
+                                    alt="Profile Dosen" height="100" width="100" style="object-fit: cover;">
+                            @else
+                                <img src="https://www.its.ac.id/international/wp-content/uploads/sites/66/2020/02/blank-profile-picture-973460_1280-300x300.jpg"
+                                    class="rounded-circle mx-auto d-block" alt="Profile Dosen" height="100" width="100"
+                                    style="object-fit: cover;">
+                            @endif
+                        </div>
+                        <table>
+                            <tr>
+                                <td class="py-2 px-4 idd">Nama</td>
+                                <td>: </td>
+                                <td class="p-2 idd">{{ $dosen->nama }}</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 idd">NIDN</td>
+                                <td>: </td>
+                                <td class="p-2 idd">{{ $dosen->nidn }}</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 idd">Email</td>
+                                <td>: </td>
+                                <td class="p-2 idd">{{ $dosen->email }}</td>
+                            </tr>
+                        </table>
+                        <div class=" image d-flex flex-column justify-content-center align-items-center">
+                            <div class=" d-flex mt-2">
+                                <a href="{{ $dosen->linkGroup }}" class="btn btn-primary btn-lg active" role="button"
+                                    aria-pressed="true" target="_blank">Join Group WA</a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        @endif
     @endcan
 @endsection

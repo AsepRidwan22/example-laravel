@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('penguji_id')->nullable();
             $table->foreignId('instansi_id')->nullable();
             $table->string('nama');
+            $table->string('photo')->nullable();
             $table->string('npm');
             $table->string('noHp');
             $table->string('kelas');

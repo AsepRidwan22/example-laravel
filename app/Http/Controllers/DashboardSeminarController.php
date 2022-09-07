@@ -21,6 +21,7 @@ class DashboardSeminarController extends Controller
     {
         return view('dashboard.seminars.index', [
             'seminars' => Seminar::all(),
+            'nullSeminars' => Seminar::first('id'),
         ]);
     }
 

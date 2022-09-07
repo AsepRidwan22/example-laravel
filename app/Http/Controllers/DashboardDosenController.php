@@ -27,6 +27,7 @@ class DashboardDosenController extends Controller
             $dosen_id = Mahasiswa::where('id', auth()->user()->id)->value('dosen_id');
 
             return view('dashboard.dosens.index', [
+                'pembimbing' => $dosen_id,
                 'dosens' => Dosen::where('id', $dosen_id)->get(),
                 'mahasiswas' => Mahasiswa::all()
             ]);
@@ -41,7 +42,8 @@ class DashboardDosenController extends Controller
     public function create()
     {
         return view('dashboard.dosens.create', [
-            'users' => User::where('roles', 'dosen')->get()->last()
+            'users' => User::where('roles', 'dosen')->get()->last(),
+
         ]);
     }
 
@@ -53,13 +55,19 @@ class DashboardDosenController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        dd($request->photo);
 
         $rules = [
             'nama' => 'required|max:255',
             'nidn' => 'required|unique:dosens',
             'email' => 'required|email:dns|unique:dosens',
+            'linkGroup' => 'required',
+            'photo' => 'image|file|max:1024'
         ];
+
+        if ($request->file('photo')) {
+            $validateData['photo'] = $request->file('photo')->store('profile-photos');
+        }
 
         $validateData = $request->validate($rules);
 
@@ -77,7 +85,7 @@ class DashboardDosenController extends Controller
 
         Dosen::create($validateData);
 
-        return redirect('/dashboard/dosens')->with('success', 'New post has been added!');
+        return redirect('/dashboard/dosens')->with('success', 'Dosen Baru Telah Ditambahkan');
     }
 
     /**

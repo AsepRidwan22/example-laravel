@@ -20,8 +20,10 @@ class DashboardProposalController extends Controller
      */
     public function index()
     {
+        // dd(Proposal::first('id'));
         return view('dashboard.proposal.index', [
             'proposals' => Proposal::all(),
+            'nullProposal' => Proposal::first('id'),
             'dosens' => Dosen::all()
         ]);
     }

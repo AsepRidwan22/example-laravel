@@ -102,6 +102,7 @@ class DatabaseSeeder extends Seeder
             'nama' => 'ridwan',
             'nidn' => '0325075802',
             'email' => 'ridwan@gmail.com',
+            'linkGroup' => 'https://chat.whatsapp.com/IUE0NJfBVM02Jy5kYLAkn0',
             'user_id' => '4'
         ]);
 
@@ -109,6 +110,7 @@ class DatabaseSeeder extends Seeder
             'nama' => 'abdul',
             'nidn' => '0325075803',
             'email' => 'abdul@gmail.com',
+            'linkGroup' => 'https://chat.whatsapp.com/IUE0NJfBVM02Jy5kYLAkn0',
             'user_id' => '5'
         ]);
 

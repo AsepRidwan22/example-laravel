@@ -61,6 +61,11 @@
             </div>
         @endforeach
     @else
-        <p>Silahkan Ajukan Proposal Terlebih dahulu</p>
+        <div class=" image d-flex flex-column justify-content-center align-items-center">
+            <img src="https://img.freepik.com/premium-vector/file-found-illustration-with-confused-people-holding-big-magnifier-search-no-result_258153-336.jpg?w=2000"
+                class="mx-auto d-block" alt="Profile Dosen" width="500" style="object-fit: cover;">
+            <p class="idd">Belum bisa mengisi progres!</p>
+            <p>Silahkan ACC proposal terlebih dahulu</p>
+        </div>
     @endif
 @endsection

@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('dosens', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('photo')->nullable();
             $table->string('nidn');
             $table->string('email')->unique();
             $table->foreignId('user_id');
+            $table->string('linkGroup');
             $table->timestamps();
         });
     }

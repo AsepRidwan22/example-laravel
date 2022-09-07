@@ -25,6 +25,7 @@ class DashboardProgresController extends Controller
     public function showProgresMhs($id)
     {
         return view('dashboard.progres.index', [
+            'checkProposal' => 1,
             'progress' => Progres::where('user_id', $id)->get()
         ]);
     }
@@ -72,7 +73,8 @@ class DashboardProgresController extends Controller
         // dd($id);
         $decryptedId = Crypt::decryptString($id);
         return view('dashboard.progres.edit', [
-            'idProgres' => Progres::where('id', $decryptedId)->value('id')
+            'idProgres' => Progres::where('id', $decryptedId)->value('id'),
+
         ]);
     }
 

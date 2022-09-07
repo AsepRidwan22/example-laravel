@@ -4,9 +4,7 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-4 border-bottom">
         <h1 class="h2">Logbook {{ $mahasiswa }}</h1>
     </div>
-    @can('mahasiswa')
-        @if ($checkProposal == 1)
-        @endcan
+    @if ($checkProposal != null && $checkProposal != 0)
         <div class="d-flex justify-content-center">
             @if (session()->has('success'))
                 <div class="alert alert-success col-lg-6" role="alert">
@@ -89,9 +87,12 @@
                 </div>
             </div>
         @endforeach
-        @can('mahasiswa')
-        @else
-        @endcan
-        <p>Silahkan Ajukan Dulu Proposal</p>
+    @else
+        <div class=" image d-flex flex-column justify-content-center align-items-center">
+            <img src="https://img.freepik.com/premium-vector/file-found-illustration-with-confused-people-holding-big-magnifier-search-no-result_258153-336.jpg?w=2000"
+                class="mx-auto d-block" alt="Profile Dosen" width="500" style="object-fit: cover;">
+            <p class="idd">Belum punya Pembimbing!</p>
+            <p>Silahkan ACC proposal terlebih dahulu</p>
+        </div>
     @endif
 @endsection
