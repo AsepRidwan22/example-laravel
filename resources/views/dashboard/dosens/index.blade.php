@@ -18,7 +18,7 @@
             </div>
         @endif
 
-        <div class="table-responsive col-lg-8">
+        <div class="table-responsive col-lg-12">
             <a href="/dashboard/dosens/create" class="btn btn-primary">Tambah Dosen</a>
             <table class="table table-striped table-sm">
                 <thead>
@@ -27,6 +27,7 @@
                         <th scope="col">Nama</th>
                         <th scope="col">NIDN</th>
                         <th scope="col">Email</th>
+                        <th scope="col">No HP</th>
                         <th scope="col" class="text-center">Mahasiswa</th>
                         <th scope="col" class="text-center">Action</th>
                     </tr>
@@ -34,20 +35,20 @@
                 <tbody>
                     @foreach ($dosens as $dosen)
                         <tr>
-                            <td class="py-2">{{ $loop->iteration }}</td>
-                            <td class="py-2">{{ $dosen->nama }}</td>
-                            <td class="py-2">{{ $dosen->nidn }}</td>
-                            <td class="py-2">{{ $dosen->email }}</td>
-                            <td class="py-2 text-center">{{ $mahasiswas->where('dosen_id', $dosen->id)->count() }}</td>
-                            <td class="py-1 text-center">
-                                <button href="/dashboard/dosens/{{ $dosen->slug }}" class="badge bg-primary border-0">List
-                                    Mahasiswa</button>
-                                <button href="/dashboard/dosens/{{ $dosen->slug }}/edit"
-                                    class="badge bg-warning border-0">Ubah</button>
+                            <td class="py-4">{{ $loop->iteration }}</td>
+                            <td class="py-4">{{ $dosen->nama }}</td>
+                            <td class="py-4">{{ $dosen->nidn }}</td>
+                            <td class="py-4">{{ $dosen->email }}</td>
+                            <td class="py-4">{{ $dosen->noHp }}</td>
+                            <td class="py-4 text-center">{{ $mahasiswas->where('dosen_id', $dosen->id)->count() }}</td>
+                            <td class="py-3 text-center">
+                                <a href="/dashboard/mahasiswas/edit" class="btn btn-primary btn-sm">Lihat
+                                    Mahasiswa</a>
+                                <a href="/dashboard/mahasiswas/edit" class="btn btn-warning btn-sm">Ubah</a>
                                 <form action="/dashboard/dosens/{{ $dosen->slug }}" method="POST" class="d-inline">
                                     @method('delete')
                                     @csrf
-                                    <button class="badge bg-danger border-0"
+                                    <button class="btn btn-danger btn-sm"
                                         onclick="return confirm('Are you sure?')">Hapus</button>
                                 </form>
                             </td>

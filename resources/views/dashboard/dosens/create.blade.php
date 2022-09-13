@@ -51,6 +51,16 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <label for="noHp" class="form-label">No HP</label>
+                <input type="text" class="form-control @error('noHp') is-invalid @enderror" id="noHp" name="noHp"
+                    autofocus value="{{ old('noHp') }}" required autocomplete="off">
+                @error('noHp')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label for="url" class="form-label">URL Group WA</label>
                 <input type="text" class="form-control @error('linkGroup') is-invalid @enderror" id="linkGroup"
                     name="linkGroup" autofocus value="{{ old('linkGroup') }}" required autocomplete="off">

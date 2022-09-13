@@ -12,7 +12,7 @@
             @method('put')
             <div class="mt-3">
                 <a href="{{ asset('storage/' . $seminar->laporan) }}" class="btn btn-success btn-sm" target="_blank">Lihat
-                    Proposal</a>
+                    Laporan</a>
             </div>
             <label for="dosen" class="form-label @error('dosen') is-invalid @enderror">Dosen
                 Penguji</label>

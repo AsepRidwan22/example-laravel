@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Logbook;
-use App\Models\Mahasiswa;
-use App\Models\Proposal;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\Dosen;
+use App\Models\Logbook;
+use App\Models\Proposal;
+use App\Models\Mahasiswa;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
 class DashboardLogbookController extends Controller
@@ -19,12 +20,21 @@ class DashboardLogbookController extends Controller
     public function index()
     {
         // dd(Proposal::where('mahasiswa_id', auth()->user()->id)->value('isAccProposal'));
-
-        return view('dashboard.logbooks.index', [
-            'checkProposal' => Proposal::where('user_id', auth()->user()->id)->value('isAccProposal'),
-            'logbooks' => logbook::where('user_id', auth()->user()->id)->get(),
-            'mahasiswa' => Mahasiswa::where('user_id', auth()->user()->id)->value('nama')
-        ]);
+        // dd('mahasiswas' => Mahasiswa::where('dosen_id', auth()->user()->id)->get());
+        // dd(Proposal::where('user_id', auth()->user()->id)->value('isAccProposal'));
+        if (auth()->user()->roles === 'mahasiswa') {
+            return view('dashboard.logbooks.index', [
+                'checkProposal' => Proposal::where('user_id', auth()->user()->id)->value('isAccProposal'),
+                'logbooks' => logbook::where('user_id', auth()->user()->id)->get(),
+                'logbookIsHadirCount' => Logbook::where('user_id', auth()->user()->id)->get()->count(),
+                'mahasiswa' => Mahasiswa::where('user_id', auth()->user()->id)->value('nama')
+            ]);
+        } elseif (auth()->user()->roles === 'dosen') {
+            $id = Dosen::where('user_id', auth()->user()->id)->pluck('id');
+            return view('dashboard.dosens.logbook', [
+                'mahasiswas' => Mahasiswa::where('dosen_id', $id)->get()
+            ]);
+        }
     }
 
     /**
@@ -43,7 +53,7 @@ class DashboardLogbookController extends Controller
 
     public function bodyUpdate($id)
     {
-        // dd($id);
+        dd($id);
         $decryptedId = Crypt::decryptString($id);
         // dd($decryptedId);
         return view('dashboard.logbooks.create', [
@@ -123,6 +133,7 @@ class DashboardLogbookController extends Controller
     {
         // dd(Mahasiswa::value('npm'));
         // dd(Crypt::decryptString($npm));
+        // dd($npm);
 
         $decryptedNpm = Crypt::decryptString($npm);
         return view('dashboard.logbooks.index', [

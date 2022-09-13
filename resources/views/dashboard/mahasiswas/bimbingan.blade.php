@@ -40,7 +40,7 @@
                             @can('koordinator')
                                 <td class="py-4">{{ $logbooks->where('mahasiswa_id', $mahasiswa->id)->count() }}</td>
                                 @if ($progres->where('mahasiswa_id', $mahasiswa->id)->count() + 1 == 5)
-                                    <td class="py-4">Sudah ACC</td>
+                                    <td class="py-4">Selesai Laporan</td>
                                 @else
                                     <td class="py-4">BAB {{ $progres->where('mahasiswa_id', $mahasiswa->id)->count() + 1 }}
                                     </td>

@@ -50,11 +50,6 @@
                         @endif
                         <td class="pt-3 text-center">
                             @can('dosen')
-                                <a href="/dashboard/logbooks/mhs/{{ Crypt::encryptString($mahasiswa->npm) }}"
-                                    class="btn btn-success btn-sm">List
-                                    Logbook</a>
-                                <a href="/dashboard/mahasiswas/progres/{{ $mahasiswa->user_id }}"
-                                    class="btn btn-primary btn-sm">Progres</a>
                             @endcan
                             <a href="/dashboard/mahasiswas/{{ $mahasiswa->slug }}/edit"
                                 class="btn btn-primary btn-sm">Lihat</a>

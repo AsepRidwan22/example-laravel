@@ -111,10 +111,13 @@ Route::get('/dashboard/mahasiswas/progres/{user:user_id}', [DashboardProgresCont
 Route::resource('/dashboard/profile', DashboardProfileController::class);
 
 Route::resource('/dashboard/proposals', DashboardProposalController::class)->middleware('auth');
+Route::get('/dashboard/instansis', [DashboardProposalController::class, 'indexInstansi'])->middleware('auth');
 Route::put('/dashboard/proposals/accept/{proposal:mahasiswa_id}', [DashboardProposalController::class, 'accept'])->middleware('auth');
 Route::put('/dashboard/proposals/edit-proposal/{id}', [DashboardProposalController::class, 'revisi'])->middleware('auth');
 
 Route::resource('/dashboard/seminars', DashboardSeminarController::class)->middleware('auth');
+// Route::get('/dashboard/seminars/{seminar:id}/accseminar', [DashboardSeminarController::class, 'accseminar'])->middleware('auth');
+Route::put('/dashboard/seminars/accseminar/{seminar:id}', [DashboardSeminarController::class, 'prosesAcc'])->middleware('auth');
 Route::get('/dashboard/seminars/{seminar:id}/addjadwal', [DashboardSeminarController::class, 'addJadwal'])->middleware('auth');
 Route::put('/dashboard/seminars/addjadwal/{seminar:id}', [DashboardSeminarController::class, 'prosesJadwal'])->middleware('auth');
 

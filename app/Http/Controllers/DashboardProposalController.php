@@ -28,6 +28,14 @@ class DashboardProposalController extends Controller
         ]);
     }
 
+    public function indexInstansi()
+    {
+        // dd(Proposal::first('id'));
+        return view('dashboard.instansi.index', [
+            'instansis' => Instansi::all(),
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

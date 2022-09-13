@@ -48,6 +48,13 @@
                         Seminar
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/seminars/create*') ? 'active' : '' }}"
+                        href="/dashboard/seminars/create">
+                        <span data-feather="file-text" class="align-text-bottom"></span>
+                        Jadwal Seminar
+                    </a>
+                </li>
             @endcan
             @can('dosen')
                 <li class="nav-item">
@@ -55,6 +62,25 @@
                         href="/dashboard/mahasiswas">
                         <span data-feather="file-text" class="align-text-bottom"></span>
                         Mahasiswa
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/logbooks*') ? 'active' : '' }}" href="/dashboard/logbooks">
+                        <span data-feather="file-text" class="align-text-bottom"></span>
+                        Logbook
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/progres*') ? 'active' : '' }}" href="/dashboard/progres">
+                        <span data-feather="file-text" class="align-text-bottom"></span>
+                        Progres
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/seminars*') ? 'active' : '' }}"
+                        href="/dashboard/seminars/create">
+                        <span data-feather="file-text" class="align-text-bottom"></span>
+                        Seminars
                     </a>
                 </li>
                 <li class="nav-item">
@@ -101,13 +127,6 @@
                 <span>Administrator</span>
             </h6>
             <ul class="nav flex-column">
-                {{-- <li class="nav-item ">
-                    <a class="nav-link {{ Request::is('dashboard/categories*') ? 'active' : '' }}" aria-current="page"
-                        href="/dashboard/categories">
-                        <span data-feather="grid" class="align-text-bottom"></span>
-                        Post Categories
-                    </a>
-                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('dashboard/mahasiswas*') ? 'active' : '' }}"
                         href="/dashboard/mahasiswas">
@@ -119,6 +138,13 @@
                     <a class="nav-link {{ Request::is('dashboard/dosens*') ? 'active' : '' }}" href="/dashboard/dosens">
                         <span data-feather="file-text" class="align-text-bottom"></span>
                         Dosen
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/instansis*') ? 'active' : '' }}"
+                        href="/dashboard/instansis">
+                        <span data-feather="file-text" class="align-text-bottom"></span>
+                        Pembimbing Instansi
                     </a>
                 </li>
             </ul>

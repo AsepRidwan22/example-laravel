@@ -5,8 +5,8 @@
         <h1 class="h2">Ajukan Proposal</h1>
     </div>
 
-    <div class="col-lg-8">
-        @if ($proposalUser->value('id') === null)
+    @if ($proposalUser->value('id') === null)
+        <div class="col-lg-8">
             <form method="POST" action="/dashboard/proposals" class="mb-5" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
@@ -62,10 +62,17 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-        @elseif ($proposalStatus === null)
-            <p>silahkan tunggu hasil</p>
-        @elseif ($proposalStatus == 0)
-            @if ($proposalUser->value('pesan') !== null)
+        </div>
+    @elseif ($proposalStatus === null)
+        <div class="image d-flex flex-column justify-content-center align-items-center">
+            <img src="{{ asset('storage/icon/vectorWaiting.jpg') }}" class="mx-auto d-block" alt="Profile Dosen"
+                width="400" style="object-fit: cover;">
+            <p class="idd">Waiting!</p>
+            <p>Silahkan tunggu Koordinator mengacc dulu</p>
+        </div>
+    @elseif ($proposalStatus == 0)
+        @if ($proposalUser->value('pesan') !== null)
+            <div class="col-lg-8">
                 <div class="card mb-3">
                     <div class="card-header">
                         List yang harus direvisi
@@ -76,7 +83,9 @@
                         </blockquote>
                     </div>
                 </div>
-            @endif
+            </div>
+        @endif
+        <div class="col-lg-8">
             <form method="POST" action="/dashboard/proposals/edit-proposal/{{ $proposalUser->value('id') }}"
                 class="mb-5" enctype="multipart/form-data">
                 @csrf
@@ -135,8 +144,14 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-        @elseif ($proposalStatus == 1)
-            <p>proposal telah di acc</p>
-        @endif
-    </div>
+        </div>
+    @elseif ($proposalStatus == 1)
+        <div class="mt-4 image d-flex flex-column justify-content-center align-items-center">
+            <img src="{{ asset('storage/icon/success.png') }}" class="mx-auto d-block" alt="Profile Dosen"
+                width="200" style="object-fit: cover;">
+            <p class="mt-4 idd">Success!</p>
+            <p>Proposal Telah di ACC</p>
+        </div>
+    @endif
+
 @endsection

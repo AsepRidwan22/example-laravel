@@ -16,59 +16,139 @@
             {{ session('danger') }}
         </div>
     @endif
-
-    <div class="table-responsive col-lg-12">
-        @can('koordinator')
-            <a href="/dashboard/profiles/create" class="btn btn-primary">Tambah Profile</a>
-        @endcan
-        <table class="table table-striped table-sm">
-            <thead>
-                <tr>
-                    <th scope="col">No.</th>
-                    @can('dosen')
-                        <th scope="col">NIDN</th>
-                    @endcan
-                    @can('mahasiswa')
-                        <th scope="col">NPM</th>
-                    @endcan
-                    <th scope="col">Nama</th>
-                    @can('mahasiswa')
-                        <th scope="col">Kelas</th>
-                    @endcan
-                    <th scope="col">Email</th>
-                    <th scope="col" class="text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($profiles as $Profile)
-                    <tr>
-                        <td class="py-4">{{ $loop->iteration }}</td>
-                        @can('dosen')
-                            <td class="py-4">{{ $Profile->nidn }}</td>
-                        @endcan
-                        @can('mahasiswa')
-                            <td class="py-4">{{ $Profile->npm }}</td>
-                        @endcan
-                        <td class="py-4">{{ $Profile->nama }}</td>
-                        @can('mahasiswa')
-                            <td class="py-4">{{ $Profile->kelas }}</td>
-                        @endcan
-                        <td class="py-4">{{ $Profile->email }}</td>
-                        <td class="pt-3 text-center">
-                            <a href="/dashboard/profiles/{{ $Profile->slug }}/edit" class="btn btn-warning btn-sm">Ubah</a>
-                            <form action="/dashboard/profiles/{{ $Profile->slug }}" method="POST" class="d-inline">
-                                @method('delete')
-                                @csrf
-                                <button class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Are you sure?')">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
+    @can('mahasiswa')
+        <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+            <div class="cardz p-4">
+                @foreach ($profiles as $profile)
+                    <div class=" image d-flex flex-column justify-content-center align-items-center">
+                        @if ($profile->photo != null)
+                            <img src="{{ asset('storage/' . $profile->photo) }}" class="rounded-circle mx-auto d-block"
+                                alt="Profile profile" height="100" width="100" style="object-fit: cover;">
+                        @else
+                            <img src="https://www.its.ac.id/international/wp-content/uploads/sites/66/2020/02/blank-profile-picture-973460_1280-300x300.jpg"
+                                class="rounded-circle mx-auto d-block" alt="Profile profile" height="100" width="100"
+                                style="object-fit: cover;">
+                        @endif
+                    </div>
+                    <table>
+                        <tr>
+                            <td class="py-2 px-4 idd">NPM</td>
+                            <td>: </td>
+                            <td class="p-2 idd">{{ $profile->npm }}</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 idd">Nama</td>
+                            <td>: </td>
+                            <td class="p-2 idd">{{ $profile->nama }}</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 idd">Kelas</td>
+                            <td>: </td>
+                            <td class="p-2 idd">{{ $profile->kelas }}</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 idd">Email</td>
+                            <td>: </td>
+                            <td class="p-2 idd">{{ $profile->email }}</td>
+                        </tr>
+                    </table>
+                    <div class=" image d-flex flex-column justify-content-center align-items-center">
+                        <div class=" d-flex mt-2">
+                            <a href="/dashboard/profiles/{{ $profile }}/edit" class="btn btn-warning btn-sm">Ubah</a>
+                        </div>
+                    </div>
                 @endforeach
-            </tbody>
-        </table>
-    </div>
-    <script>
-        $('.alert').alert()
-    </script>
+            </div>
+        </div>
+    @endcan
+    @can('dosen')
+        <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+            <div class="cardz p-4">
+                @foreach ($profiles as $profile)
+                    <div class=" image d-flex flex-column justify-content-center align-items-center">
+                        @if ($profile->photo != null)
+                            <img src="{{ asset('storage/' . $profile->photo) }}" class="rounded-circle mx-auto d-block"
+                                alt="Profile profile" height="100" width="100" style="object-fit: cover;">
+                        @else
+                            <img src="https://www.its.ac.id/international/wp-content/uploads/sites/66/2020/02/blank-profile-picture-973460_1280-300x300.jpg"
+                                class="rounded-circle mx-auto d-block" alt="Profile profile" height="100" width="100"
+                                style="object-fit: cover;">
+                        @endif
+                    </div>
+                    <table>
+                        <tr>
+                            <td class="py-2 px-4 idd">NIDN</td>
+                            <td>: </td>
+                            <td class="p-2 idd">{{ $profile->nidn }}</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 idd">Nama</td>
+                            <td>: </td>
+                            <td class="p-2 idd">{{ $profile->nama }}</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 idd">No Hp</td>
+                            <td>: </td>
+                            <td class="p-2 idd">{{ $profile->noHp }}</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 idd">Email</td>
+                            <td>: </td>
+                            <td class="p-2 idd">{{ $profile->email }}</td>
+                        </tr>
+                    </table>
+                    <div class=" image d-flex flex-column justify-content-center align-items-center">
+                        <div class=" d-flex mt-2">
+                            <a href="/dashboard/profiles/{{ $profile }}/edit" class="btn btn-warning btn-sm">Ubah</a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endcan
+    @can('koordinator')
+        <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+            <div class="cardz p-4">
+                @foreach ($profiles as $profile)
+                    <div class=" image d-flex flex-column justify-content-center align-items-center">
+                        @if ($profile->photo != null)
+                            <img src="{{ asset('storage/' . $profile->photo) }}" class="rounded-circle mx-auto d-block"
+                                alt="Profile profile" height="100" width="100" style="object-fit: cover;">
+                        @else
+                            <img src="https://www.its.ac.id/international/wp-content/uploads/sites/66/2020/02/blank-profile-picture-973460_1280-300x300.jpg"
+                                class="rounded-circle mx-auto d-block" alt="Profile profile" height="100" width="100"
+                                style="object-fit: cover;">
+                        @endif
+                    </div>
+                    <table>
+                        <tr>
+                            <td class="py-2 px-4 idd">NIDN</td>
+                            <td>: </td>
+                            <td class="p-2 idd">{{ $profile->nidn }}</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 idd">Nama</td>
+                            <td>: </td>
+                            <td class="p-2 idd">{{ $profile->nama }}</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 idd">No Hp</td>
+                            <td>: </td>
+                            <td class="p-2 idd">{{ $profile->noHp }}</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 idd">Email</td>
+                            <td>: </td>
+                            <td class="p-2 idd">{{ $profile->email }}</td>
+                        </tr>
+                    </table>
+                    <div class=" image d-flex flex-column justify-content-center align-items-center">
+                        <div class=" d-flex mt-2">
+                            <a href="/dashboard/profiles/{{ $profile }}/edit" class="btn btn-warning btn-sm">Ubah</a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endcan
 @endsection

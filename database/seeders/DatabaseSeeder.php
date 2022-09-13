@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Mahasiswa;
 use App\Models\Dosen;
+use App\Models\Koordinator;
 use App\Models\Logbook;
 use App\Models\Post;
 use App\Models\Progres;
@@ -102,6 +103,7 @@ class DatabaseSeeder extends Seeder
             'nama' => 'ridwan',
             'nidn' => '0325075802',
             'email' => 'ridwan@gmail.com',
+            'noHp' => '083107113654',
             'linkGroup' => 'https://chat.whatsapp.com/IUE0NJfBVM02Jy5kYLAkn0',
             'user_id' => '4'
         ]);
@@ -110,8 +112,17 @@ class DatabaseSeeder extends Seeder
             'nama' => 'abdul',
             'nidn' => '0325075803',
             'email' => 'abdul@gmail.com',
+            'noHp' => '083107113655',
             'linkGroup' => 'https://chat.whatsapp.com/IUE0NJfBVM02Jy5kYLAkn0',
             'user_id' => '5'
+        ]);
+
+        Koordinator::create([
+            'nama' => 'diny',
+            'nidn' => '0325075801',
+            'email' => 'diny@gmail.com',
+            'noHp' => '083107193655',
+            'user_id' => '3'
         ]);
 
         // Logbook::create([

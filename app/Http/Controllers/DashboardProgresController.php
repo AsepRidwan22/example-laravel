@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dosen;
 use App\Models\Progres;
 use App\Models\Proposal;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -16,10 +18,18 @@ class DashboardProgresController extends Controller
      */
     public function index()
     {
-        return view('dashboard.progres.index', [
-            'checkProposal' => Proposal::where('mahasiswa_id', auth()->user()->id)->value('isAccProposal'),
-            'progress' => Progres::where('user_id', auth()->user()->id)->get()
-        ]);
+        // dd(Proposal::where('user_id', auth()->user()->id)->value('isAccProposal'));
+        if (auth()->user()->roles === 'mahasiswa') {
+            return view('dashboard.progres.index', [
+                'checkProposal' => Proposal::where('mahasiswa_id', auth()->user()->id)->value('isAccProposal'),
+                'progress' => Progres::where('user_id', auth()->user()->id)->get()
+            ]);
+        } elseif (auth()->user()->roles === 'dosen') {
+            $id = Dosen::where('user_id', auth()->user()->id)->pluck('id');
+            return view('dashboard.dosens.progres', [
+                'mahasiswas' => Mahasiswa::where('dosen_id', $id)->get()
+            ]);
+        }
     }
 
     public function showProgresMhs($id)
@@ -74,8 +84,9 @@ class DashboardProgresController extends Controller
         $decryptedId = Crypt::decryptString($id);
         return view('dashboard.progres.edit', [
             'idProgres' => Progres::where('id', $decryptedId)->value('id'),
-
         ]);
+
+        // Progres::find($id)->update();
     }
 
     /**
@@ -91,8 +102,9 @@ class DashboardProgresController extends Controller
         $validateData = ['laporan' => 'required', 'user_id' => 'required'];
         $validateData['laporan'] = $request->laporan;
         $validateData['user_id'] = auth()->user()->id;
+        $validateData['laporan'] = $request->file('laporan')->store('laporan');
         Progres::where('id', $request->id)->update($validateData);
-        return redirect('/dashboard/progres')->with('success', 'New post has been added!');
+        return redirect('/dashboard/progres')->with('success', 'Progres Laporan Berhasil Ditambahkan!');
     }
 
     /**

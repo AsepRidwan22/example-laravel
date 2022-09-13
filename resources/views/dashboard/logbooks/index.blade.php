@@ -19,6 +19,7 @@
                 </div>
             @endif
         </div>
+
         @foreach ($logbooks as $logbook)
             <div class="d-flex justify-content-center">
                 <div class="card mb-4 col-lg-6">
@@ -41,8 +42,6 @@
 
                     </div>
                     <div class="card-body">
-                        {{-- <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
                         @if ($logbook->body != null)
                             <div class="card-body bg-light border rounded mb-2">
                                 <p class="card-text">

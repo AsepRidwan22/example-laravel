@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Dosen;
+use App\Models\Koordinator;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 
@@ -23,9 +25,12 @@ class DashboardProfileController extends Controller
             return view('dashboard.profile.index', [
                 'profiles' => Dosen::where('user_id', auth()->user()->id)->get()
             ]);
+        } else if (auth()->user()->roles === 'koordinator') {
+            return view('dashboard.profile.index', [
+                'profiles' => Koordinator::get()
+            ]);
         }
     }
-
     /**
      * Show the form for creating a new resource.
      *

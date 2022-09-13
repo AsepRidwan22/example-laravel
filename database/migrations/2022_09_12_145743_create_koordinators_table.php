@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('dosens', function (Blueprint $table) {
+        Schema::create('koordinators', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
             $table->string('photo')->nullable();
@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('noHp')->unique();
             $table->foreignId('user_id');
-            $table->string('linkGroup');
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dosens');
+        Schema::dropIfExists('koordinators');
     }
 };

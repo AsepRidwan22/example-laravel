@@ -52,12 +52,17 @@
                                 <td class="py-4">Belum Diisi</td>
                                 <td class="py-4">Belum Diisi</td>
                             @endif
-
-                            <td class="pt-3 text-center">
-                                <a href="/dashboard/seminars/{{ $seminar->id }}/addjadwal"
-                                    class="btn btn-success btn-sm">Buat
-                                    Jadwal</a>
-                            </td>
+                            @if ($seminar->tanggal == null)
+                                <td class="pt-3 text-center">
+                                    <a href="/dashboard/seminars/{{ $seminar->id }}/addjadwal"
+                                        class="btn btn-success btn-sm">Buat
+                                        Jadwal</a>
+                                </td>
+                            @else
+                                <td class="pt-4 text-center">
+                                    <p>Sudah dibuat</p>
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>

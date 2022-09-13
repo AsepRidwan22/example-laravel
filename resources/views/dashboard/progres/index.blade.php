@@ -5,7 +5,7 @@
         <h1 class="h2">Progres Laporan Kerja Praktek</h1>
     </div>
 
-    @if ($checkProposal == 1)
+    @if ($checkProposal !== 0)
         @if (session()->has('success'))
             <div class="alert alert-success col-lg-8" role="alert">
                 {{ session('success') }}
@@ -26,7 +26,8 @@
                 <div class="card-body">
                     @if ($progres->laporan != null)
                         <div class="card-body bg-light border rounded mb-2 text-center">
-                            <a href="{!! $progres->laporan !!}" class="btn btn-success" target="_blank">Lihat Progres</a>
+                            <a href="{{ asset('storage/' . $progres->laporan) }}" class="btn btn-success"
+                                target="_blank">Lihat Progres</a>
                         </div>
                     @endif
 

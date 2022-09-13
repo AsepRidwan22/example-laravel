@@ -43,7 +43,6 @@ class DashboardDosenController extends Controller
     {
         return view('dashboard.dosens.create', [
             'users' => User::where('roles', 'dosen')->get()->last(),
-
         ]);
     }
 
@@ -55,12 +54,13 @@ class DashboardDosenController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->photo);
+        // dd($request->photo);
 
         $rules = [
             'nama' => 'required|max:255',
             'nidn' => 'required|unique:dosens',
             'email' => 'required|email:dns|unique:dosens',
+            'noHp' => 'required|unique:dosens',
             'linkGroup' => 'required',
             'photo' => 'image|file|max:1024'
         ];
