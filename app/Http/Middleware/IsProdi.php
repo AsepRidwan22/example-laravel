@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsPembimbingLapangan
+class IsProdi
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class IsPembimbingLapangan
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->guest() || auth()->user()->roles !== 'lapangan') {
+        if (auth()->guest() || auth()->user()->roles !== 'prodi') { //kodisi akun yang belum login
             abort(403);
         }
         return $next($request);

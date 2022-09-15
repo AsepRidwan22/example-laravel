@@ -27,6 +27,16 @@ class DashboardSeminarController extends Controller
         ]);
     }
 
+    public function rekapitulasi()
+    {
+        // dd(Seminar::where('user_id', auth()->user()->id)->whereNotNull('tanggal'));
+        return view('dashboard.rekapitulasi.index', [
+            'seminars' => Seminar::whereNotNull('tanggal')->get(),
+            'nullSeminars' => Seminar::first('id'),
+            // 'jadwalSeminar' => Seminar::where('user_id', auth()->user()->id)->whereNotNull('tanggal')
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -129,6 +139,21 @@ class DashboardSeminarController extends Controller
         Penilaian::create(['user_id' => $seminar->user_id]);
 
         return redirect('/dashboard/seminars')->with('success', 'Jadwal sudah dibuat');
+    }
+
+    public function showJadwal()
+    {
+        // dd($seminar->id);
+        if (auth()->user()->roles === 'mahasiswa') {
+            return view('dashboard.seminars.jadwal', [
+                'seminars' => Seminar::where('mahasiswa_id', auth()->user()->id)->get()
+            ]);
+        } else if (auth()->user()->roles === 'dosen') {
+            $id = Dosen::where('user_id', auth()->user()->id)->pluck('id');
+            return view('dashboard.mahasiswas.index', [
+                'mahasiswas' => Mahasiswa::where('dosen_id', $id)->get()
+            ]);
+        }
     }
 
     public function accseminar(Seminar $seminar)

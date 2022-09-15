@@ -13,7 +13,7 @@
             <div class="mb-3">
                 <label for="pembimbing_1" class="form-label">Pemahaman Terhadap Masalah</label>
                 <input type="text" class="form-control @error('pembimbing_1') is-invalid @enderror" id="pembimbing_1"
-                    name="pembimbing_1" value="{{ old('pembimbing_1') }}" required autocomplete="off">
+                    name="pembimbing_1" value="{{ old('pembimbing_1') }}" required autocomplete="off" max="9">
                 @error('pembimbing_1')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -101,7 +101,8 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="pembimbing_10" class="form-label">Mampu membuktikan hasil KP sebagai solusi dari masalah</label>
+                <label for="pembimbing_10" class="form-label">Mampu membuktikan hasil KP sebagai solusi dari
+                    masalah</label>
                 <input type="text" class="form-control @error('pembimbing_10') is-invalid @enderror"
                     id="pembimbing_10" name="pembimbing_10" value="{{ old('pembimbing_10') }}" required
                     autocomplete="off">

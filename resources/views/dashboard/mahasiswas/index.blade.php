@@ -20,6 +20,32 @@
     <div class="table-responsive col-lg-12">
         @can('koordinator')
             <a href="/dashboard/mahasiswas/create" class="btn btn-primary">Tambah Mahasiswa</a>
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#importDataModal">Import</button>
+            <div class="modal fade" id="importDataModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Import Data</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" action="/dashboard/mahasiswa/import" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="cover">Upload File</label>
+                                    <input type="file" class="form-control" name="file" />
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Import Data</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endcan
         <table class="table table-striped table-sm">
             <thead>

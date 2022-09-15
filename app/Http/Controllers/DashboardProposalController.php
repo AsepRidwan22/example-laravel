@@ -24,7 +24,8 @@ class DashboardProposalController extends Controller
         return view('dashboard.proposal.index', [
             'proposals' => Proposal::all(),
             'nullProposal' => Proposal::first('id'),
-            'dosens' => Dosen::all()
+            'dosens' => Dosen::all(),
+            'jumlahMhs' => Mahasiswa::all()
         ]);
     }
 
@@ -46,7 +47,6 @@ class DashboardProposalController extends Controller
         // dd(Proposal::where('user_id', auth()->user()->id)->value('isAccProposal'));
         return view('dashboard.proposal.create', [
             'categories' => Proposal::all(),
-
             'proposalUser' => Proposal::where('user_id', auth()->user()->id)->get(),
             'proposalStatus' => Proposal::where('user_id', auth()->user()->id)->value('isAccProposal')
         ]);
@@ -73,12 +73,12 @@ class DashboardProposalController extends Controller
 
         $validateData = $request->validate([
             'judul' => 'required|max:255',
-            'proposal' => 'required|mimes:pdf|max:2048'
+            'proposal' => 'required'
         ]);
 
-        if ($request->file('proposal')) {
-            $validateData['proposal'] = $request->file('proposal')->store('proposal');
-        }
+        // if ($request->file('proposal')) {
+        //     $validateData['proposal'] = $request->file('proposal')->store('proposal');
+        // }
 
         $validateData['user_id'] = auth()->user()->id;
         $validateData['mahasiswa_id']  = Mahasiswa::where('user_id', auth()->user()->id)->value('id');

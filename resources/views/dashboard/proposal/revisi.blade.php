@@ -15,8 +15,7 @@
                         <input type="text" class="form-control @error('judul') is-invalid @enderror" id="judul"
                             name="judul" autofocus value="{{ $proposal->judul }}" required disabled>
                     </div>
-                    <a href="{{ asset('storage/' . $proposal->proposal) }}" class="btn btn-primary btn-sm mb-3"
-                        target="_blank">Lihat
+                    <a href="{{ $proposal->proposal }}" class="btn btn-primary btn-sm mb-3" target="_blank">Lihat
                         Proposal</a>
                     <div class="form-group">
                         <label for="pesan" class="mb-3">Pesan</label>

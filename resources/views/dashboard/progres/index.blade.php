@@ -5,7 +5,7 @@
         <h1 class="h2">Progres Laporan Kerja Praktek</h1>
     </div>
 
-    @if ($checkProposal !== 0)
+    @if ($checkProposal == 1)
         @if (session()->has('success'))
             <div class="alert alert-success col-lg-8" role="alert">
                 {{ session('success') }}

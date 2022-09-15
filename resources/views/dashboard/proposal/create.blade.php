@@ -51,6 +51,16 @@
                     @enderror
                 </div>
                 <div class="mb-3">
+                    <label for="proposal" class="form-label">URL Proposal</label>
+                    <input type="text" class="form-control @error('proposal') is-invalid @enderror" id="proposal"
+                        name="proposal" value="{{ old('proposal') }}" required autocomplete="off">
+                    @error('proposal')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                {{-- <div class="mb-3">
                     <label for="proposal" class="form-label @error('proposal') is-invalid @enderror">Post proposal</label>
                     <input class="form-control @error('proposal') is invalid @enderror" type="file" id="proposal"
                         name="proposal" onchange="previewproposal()">
@@ -59,7 +69,7 @@
                             {{ $message }}
                         </div>
                     @enderror
-                </div>
+                </div> --}}
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
@@ -132,6 +142,16 @@
                     @enderror
                 </div>
                 <div class="mb-3">
+                    <label for="proposal" class="form-label">URL Proposal</label>
+                    <input type="text" class="form-control @error('proposal') is-invalid @enderror" id="proposal"
+                        name="proposal" value="{{ old('proposal') }}" required autocomplete="off">
+                    @error('proposal')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                {{-- <div class="mb-3">
                     <label for="proposal" class="form-label @error('proposal') is-invalid @enderror">Post
                         proposal</label>
                     <input class="form-control @error('proposal') is invalid @enderror" type="file" id="proposal"
@@ -141,7 +161,7 @@
                             {{ $message }}
                         </div>
                     @enderror
-                </div>
+                </div> --}}
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

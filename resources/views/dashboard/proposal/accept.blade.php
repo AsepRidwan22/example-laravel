@@ -17,7 +17,13 @@
                                 @if (old('dosen_id') == $dosen->id)
                                     <option value="{{ $dosen->id }}" selected>{{ $dosen->nama }}</option>
                                 @else
-                                    <option value="{{ $dosen->id }}">{{ $dosen->nama }}</option>
+                                    <option value="{{ $dosen->id }}">
+                                        <div class="d-flex justify-content-between">
+                                            {{ $dosen->nama }}
+                                            <p>( Mahasiswa : {{ $jumlahMhs->where('dosen_id', $dosen->id)->count() }})
+                                            </p>
+                                        </div>
+                                    </option>
                                 @endif
                             @endforeach
                         </select>

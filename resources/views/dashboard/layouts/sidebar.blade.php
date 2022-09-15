@@ -9,12 +9,34 @@
                     </a>
                 </li>
             @endcan
-            <li class="nav-item">
-                <a class="nav-link {{ Request::is('dashboard/profile*') ? 'active' : '' }}" href="/dashboard/profile">
-                    <span data-feather="file-text" class="align-text-bottom"></span>
-                    Profile
-                </a>
-            </li>
+            @cannot('koordinator')
+                @cannot('dosen')
+                    @cannot('mahasiswa')
+                        <li class="nav-item ">
+                            <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}" aria-current="page"
+                                href="/dashboard">
+                                <span data-feather="home" class="align-text-bottom"></span>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link {{ Request::is('dashboard/rekapitulasi') ? 'active' : '' }}" aria-current="page"
+                                href="/dashboard/rekapitulasi">
+                                <span data-feather="home" class="align-text-bottom"></span>
+                                Rekapitulasi
+                            </a>
+                        </li>
+                    @endcannot
+                @endcannot
+            @endcannot
+            @canany(['koordinator', 'dosen', 'mahasiswa'])
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('dashboard/profile*') ? 'active' : '' }}" href="/dashboard/profile">
+                        <span data-feather="file-text" class="align-text-bottom"></span>
+                        Profile
+                    </a>
+                </li>
+            @endcanany
             @can('mahasiswa')
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('dashboard/proposals/create') ? 'active' : '' }}"
@@ -49,8 +71,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('dashboard/seminars/create*') ? 'active' : '' }}"
-                        href="/dashboard/seminars/create">
+                    <a class="nav-link {{ Request::is('dashboard/seminars/jadwal/show*') ? 'active' : '' }}"
+                        href="/dashboard/seminars/jadwal/show">
                         <span data-feather="file-text" class="align-text-bottom"></span>
                         Jadwal Seminar
                     </a>
@@ -65,7 +87,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('dashboard/logbooks*') ? 'active' : '' }}" href="/dashboard/logbooks">
+                    <a class="nav-link {{ Request::is('dashboard/logbooks*') ? 'active' : '' }}"
+                        href="/dashboard/logbooks">
                         <span data-feather="file-text" class="align-text-bottom"></span>
                         Logbook
                     </a>

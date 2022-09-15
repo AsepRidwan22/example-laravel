@@ -35,7 +35,7 @@ class DashboardProgresController extends Controller
     public function showProgresMhs($id)
     {
         return view('dashboard.progres.index', [
-            'checkProposal' => 1,
+            'checkProposal' => Proposal::where('mahasiswa_id', auth()->user()->id)->value('isAccProposal'),
             'progress' => Progres::where('user_id', $id)->get()
         ]);
     }

@@ -8,9 +8,11 @@ use App\Models\Logbook;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Imports\MahasiswasImport;
 use App\Models\Progres;
 use App\Models\Proposal;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\Console\Output\NullOutput;
 
 class DashboardMahasiswaController extends Controller
@@ -35,6 +37,13 @@ class DashboardMahasiswaController extends Controller
                 'mahasiswas' => Mahasiswa::where('dosen_id', $id)->get()
             ]);
         }
+    }
+
+    public function import(Request $request)
+    {
+        Excel::import(new MahasiswasImport, $request->file('file'));
+
+        return redirect('/dashboard/mahasiswas')->with('success', 'Mahasiswa beserta akunnya sudah ditambahkan!');
     }
 
     public function dashboard()
@@ -123,7 +132,7 @@ class DashboardMahasiswaController extends Controller
         $user = User::where('username', $request->npm)->value('id');
         $mahasiswa = Mahasiswa::where('npm', $request->npm)->value('id');
 
-        Logbook::factory(7)->create(['user_id' => $user, 'mahasiswa_id' => $mahasiswa]);
+        Logbook::factory(12)->create(['user_id' => $user, 'mahasiswa_id' => $mahasiswa]);
         Progres::factory(4)->create(['user_id' => $user, 'mahasiswa_id' => $mahasiswa]);
         return redirect('/dashboard/mahasiswas')->with('success', 'Mahasiswa beserta akunnya sudah ditambahkan!');
     }

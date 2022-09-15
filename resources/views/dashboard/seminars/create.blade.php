@@ -51,43 +51,11 @@
                         <p>Silahkan tunggu Koordinator mengacc dulu</p>
                     </div>
                 @else
-                    <div class="table-responsive col-lg-20">
-                        <table class="table table-striped table-lg">
-                            <thead>
-                                <tr>
-                                    <th scope="col">No.</th>
-                                    <th scope="col">NPM</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">Penguji</th>
-                                    <th scope="col">Tanggal</th>
-                                    <th scope="col">Waktu</th>
-                                    <th scope="col">Ruangan</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($seminars as $seminar)
-                                    <tr>
-                                        <td class="py-4">{{ $loop->iteration }}</td>
-                                        <td class="py-4">{{ $seminar->mahasiswa->npm }}</td>
-                                        <td class="py-4">{{ $seminar->mahasiswa->nama }}</td>
-                                        @if ($seminar->dosen_id != null)
-                                            <td class="py-4">{{ $seminar->penguji->nama }}</td>
-                                        @else
-                                            <td class="py-4">Belum Diisi</td>
-                                        @endif
-                                        @if ($seminar->tanggal != null)
-                                            <td class="py-4">{{ $seminar->tanggal }}</td>
-                                            <td class="py-4">{{ $seminar->waktu }}</td>
-                                            <td class="py-4">{{ $seminar->ruangan }}</td>
-                                        @else
-                                            <td class="py-4">Belum Diisi</td>
-                                            <td class="py-4">Belum Diisi</td>
-                                            <td class="py-4">Belum Diisi</td>
-                                        @endif
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                    <div class="mt-4 image d-flex flex-column justify-content-center align-items-center">
+                        <img src="{{ asset('storage/icon/success.png') }}" class="mx-auto d-block" alt="Profile Dosen"
+                            width="200" style="object-fit: cover;">
+                        <p class="mt-4 idd">Success!</p>
+                        <p>Seminar Telah di ACC</p>
                     </div>
                 @endif
             </form>

@@ -109,6 +109,8 @@ Route::get('/dashboard/logbooks/mhs/{mahasiswa:npm}', [DashboardLogbookControlle
 Route::resource('/dashboard/progres', DashboardProgresController::class)->middleware('auth');
 Route::get('/dashboard/mahasiswas/progres/{user:user_id}', [DashboardProgresController::class, 'showProgresMhs']);
 Route::resource('/dashboard/profile', DashboardProfileController::class);
+Route::post('/dashboard/mahasiswa/import', [DashboardMahasiswaController::class, 'import'])->middleware('auth');
+
 
 Route::resource('/dashboard/proposals', DashboardProposalController::class)->middleware('auth');
 Route::get('/dashboard/instansis', [DashboardProposalController::class, 'indexInstansi'])->middleware('auth');
@@ -119,7 +121,9 @@ Route::resource('/dashboard/seminars', DashboardSeminarController::class)->middl
 // Route::get('/dashboard/seminars/{seminar:id}/accseminar', [DashboardSeminarController::class, 'accseminar'])->middleware('auth');
 Route::put('/dashboard/seminars/accseminar/{seminar:id}', [DashboardSeminarController::class, 'prosesAcc'])->middleware('auth');
 Route::get('/dashboard/seminars/{seminar:id}/addjadwal', [DashboardSeminarController::class, 'addJadwal'])->middleware('auth');
+Route::get('/dashboard/seminars/jadwal/show', [DashboardSeminarController::class, 'showJadwal'])->middleware('auth');
 Route::put('/dashboard/seminars/addjadwal/{seminar:id}', [DashboardSeminarController::class, 'prosesJadwal'])->middleware('auth');
+Route::get('/dashboard/rekapitulasi', [DashboardSeminarController::class, 'rekapitulasi'])->middleware('auth');
 
 Route::resource('/dashboard/penilaians/bimbingan', DashboardPenilaianController::class)->middleware('auth');
 Route::get('/dashboard/penilaians/bimbingan/{mahasiswa:id}/create', [DashboardPenilaianController::class, 'viewPembimbing'])->middleware('auth');
