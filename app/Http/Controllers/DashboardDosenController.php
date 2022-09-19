@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
-use App\Models\User;
+use App\Imports\DosenImport;
 use Illuminate\Http\Request;
+// use Clockwork\Storage\Storage;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
 
 class DashboardDosenController extends Controller
@@ -34,6 +38,13 @@ class DashboardDosenController extends Controller
         }
     }
 
+    public function import(Request $request)
+    {
+        Excel::import(new DosenImport, $request->file('file'));
+
+        return redirect('/dashboard/dosens')->with('success', 'Dosen beserta akunnya sudah ditambahkan!');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -54,18 +65,18 @@ class DashboardDosenController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->photo);
+        // dd($request->file('photo') != null);
 
         $rules = [
             'nama' => 'required|max:255',
             'nidn' => 'required|unique:dosens',
-            'email' => 'required|email:dns|unique:dosens',
+            'email' => 'required|unique:dosens',
             'noHp' => 'required|unique:dosens',
             'linkGroup' => 'required',
             'photo' => 'image|file|max:1024'
         ];
 
-        if ($request->file('photo')) {
+        if ($request->file('photo') != null) {
             $validateData['photo'] = $request->file('photo')->store('profile-photos');
         }
 
@@ -117,9 +128,40 @@ class DashboardDosenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Dosen $dosen)
     {
-        //
+        // dd($request->noHp);
+        $rules = [
+            'nama' => 'required|max:255',
+            'linkGroup' => 'required',
+            'photo' => 'image|file|max:1024'
+        ];
+
+        if ($request->nidn != $dosen->nidn) {
+            $rules['nidn'] = 'required|unique:dosens';
+        }
+
+        if ($request->email != $dosen->email) {
+            $rules['email'] = 'required|email:dns|unique:dosens';
+        }
+
+        if ($request->noHp != $dosen->noHp) {
+            $rules['noHp'] = 'required|unique:dosens';
+        }
+
+        $validateData = $request->validate($rules);
+
+        // if ($request->file('photo')) {
+        //     if ($request->oldImage) {
+        //         Storage::delete($request->oldImage);
+        //     }
+        //     $validateData['image'] = $request->file('image')->store('post-images');
+        // }
+        Dosen::where('id', $dosen->id)->update($validateData);
+        if (auth()->user()->roles === 'koordinator') {
+            return redirect('/dashboard/dosens')->with('success', 'Data Dosen Berhasil diubah');
+        }
+        return redirect('/dashboard/profile')->with('success', 'Identitas Berhasil diubah');
     }
 
     /**
@@ -128,8 +170,12 @@ class DashboardDosenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Dosen $dosen)
     {
-        //
+        // if ($dosen->image) {
+        //     Storage::delete($dosen->image);
+        // }
+        dosen::destroy($dosen->id);
+        return redirect('/dashboard/dosens')->with('danger', 'post has been deleted!');
     }
 }

@@ -98,10 +98,12 @@
                         </tr>
                     </table>
                     <div class=" image d-flex flex-column justify-content-center align-items-center">
-                        <div class=" d-flex mt-2">
-                            <a href="/dashboard/profiles/{{ $profile }}/edit" class="btn btn-warning btn-sm">Ubah</a>
-                        </div>
+                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                            data-target="#dosenEdit{{ $profile->id }}">
+                            Ubah
+                        </button>
                     </div>
+                    @include('dashboard.profile.edit')
                 @endforeach
             </div>
         </div>
@@ -142,11 +144,11 @@
                             <td class="p-2 idd">{{ $profile->email }}</td>
                         </tr>
                     </table>
-                    <div class=" image d-flex flex-column justify-content-center align-items-center">
+                    {{-- <div class=" image d-flex flex-column justify-content-center align-items-center">
                         <div class=" d-flex mt-2">
                             <a href="/dashboard/profiles/{{ $profile }}/edit" class="btn btn-warning btn-sm">Ubah</a>
                         </div>
-                    </div>
+                    </div> --}}
                 @endforeach
             </div>
         </div>

@@ -7,19 +7,45 @@
         </div>
 
         @if (session()->has('success'))
-            <div class="alert alert-success col-lg-8" role="alert">
+            <div class="alert alert-success col-lg-12" role="alert">
                 {{ session('success') }}
             </div>
         @endif
 
         @if (session()->has('danger'))
-            <div class="alert alert-danger col-lg-8" role="alert">
+            <div class="alert alert-danger col-lg-12" role="alert">
                 {{ session('danger') }}
             </div>
         @endif
 
         <div class="table-responsive col-lg-12">
             <a href="/dashboard/dosens/create" class="btn btn-primary">Tambah Dosen</a>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#importDataModal">Import</button>
+            <div class="modal fade" id="importDataModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Import Data</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" action="/dashboard/dosen/import" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="cover">Upload File</label>
+                                    <input type="file" class="form-control" name="file" />
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Import Data</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <table class="table table-striped table-sm">
                 <thead>
                     <tr>
@@ -42,16 +68,21 @@
                             <td class="py-4">{{ $dosen->noHp }}</td>
                             <td class="py-4 text-center">{{ $mahasiswas->where('dosen_id', $dosen->id)->count() }}</td>
                             <td class="py-3 text-center">
-                                <a href="/dashboard/mahasiswas/edit" class="btn btn-primary btn-sm">Lihat
-                                    Mahasiswa</a>
-                                <a href="/dashboard/mahasiswas/edit" class="btn btn-warning btn-sm">Ubah</a>
-                                <form action="/dashboard/dosens/{{ $dosen->slug }}" method="POST" class="d-inline">
+                                {{-- <a href="/dashboard/mahasiswas/edit" class="btn btn-primary btn-sm">Lihat
+                                    Mahasiswa</a> --}}
+                                <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                    data-target="#dosenEdit{{ $dosen->id }}">
+                                    Ubah
+                                </button>
+
+                                <form action="/dashboard/dosens/{{ $dosen->id }}" method="POST" class="d-inline">
                                     @method('delete')
                                     @csrf
                                     <button class="btn btn-danger btn-sm"
                                         onclick="return confirm('Are you sure?')">Hapus</button>
                                 </form>
                             </td>
+                            @include('dashboard.dosens.edit')
                         </tr>
                     @endforeach
                 </tbody>

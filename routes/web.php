@@ -110,6 +110,7 @@ Route::resource('/dashboard/progres', DashboardProgresController::class)->middle
 Route::get('/dashboard/mahasiswas/progres/{user:user_id}', [DashboardProgresController::class, 'showProgresMhs']);
 Route::resource('/dashboard/profile', DashboardProfileController::class);
 Route::post('/dashboard/mahasiswa/import', [DashboardMahasiswaController::class, 'import'])->middleware('auth');
+Route::post('/dashboard/dosen/import', [DashboardDosenController::class, 'import'])->middleware('auth');
 
 
 Route::resource('/dashboard/proposals', DashboardProposalController::class)->middleware('auth');
