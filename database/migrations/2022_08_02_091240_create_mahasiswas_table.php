@@ -20,11 +20,13 @@ return new class extends Migration
             $table->foreignId('penguji_id')->nullable();
             $table->foreignId('instansi_id')->nullable();
             $table->string('nama');
+            $table->string('angkatan');
+            $table->string('priode');
             $table->string('photo')->nullable();
-            $table->string('npm');
-            $table->string('noHp');
+            $table->string('npm')->unique();
+            $table->string('noHp')->unique();
             $table->string('kelas');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->timestamps();
         });
     }

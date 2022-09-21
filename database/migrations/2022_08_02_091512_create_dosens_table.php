@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('photo')->nullable();
-            $table->string('nidn');
+            $table->string('nidn')->unique();
             $table->string('email')->unique();
             $table->string('noHp')->unique();
             $table->foreignId('user_id');

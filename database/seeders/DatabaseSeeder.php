@@ -92,6 +92,8 @@ class DatabaseSeeder extends Seeder
         Mahasiswa::create([
             'nama' => 'Asep Ridwan',
             'npm' => '5520119040',
+            'angkatan' => '2019',
+            'priode' => '2019-2020',
             'noHp' => '083107113661',
             'kelas' => 'IF B 2019',
             'email' => 'udin@gmail.com',
@@ -101,6 +103,8 @@ class DatabaseSeeder extends Seeder
         Mahasiswa::create([
             'nama' => 'udin saparudin',
             'npm' => '5520119041',
+            'angkatan' => '2019',
+            'priode' => '2019-2020',
             'noHp' => '081808613971',
             'kelas' => 'IF B 2019',
             'email' => 'asep@gmail.com',
@@ -147,8 +151,8 @@ class DatabaseSeeder extends Seeder
         //     'user_id' => 1,
         // ]);
 
-        Logbook::factory(7)->create(['user_id' => 1, 'mahasiswa_id' => 1]);
-        Logbook::factory(7)->create(['user_id' => 2, 'mahasiswa_id' => 2]);
+        Logbook::factory(12)->create(['user_id' => 1, 'mahasiswa_id' => 1]);
+        Logbook::factory(12)->create(['user_id' => 2, 'mahasiswa_id' => 2]);
         Progres::factory(4)->create(['user_id' => 1, 'mahasiswa_id' => 1]);
         Progres::factory(4)->create(['user_id' => 2, 'mahasiswa_id' => 2]);
 

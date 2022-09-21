@@ -112,7 +112,7 @@ class DashboardLogbookController extends Controller
         $validateData['user_id'] = auth()->user()->id;
 
         Logbook::where('id', $request->id)->update($validateData);
-        return redirect('/dashboard/logbooks')->with('success', 'post has been updated!');
+        return redirect('/dashboard/logbooks')->with('success', 'Logbook Berhasil Dibuat');
         // Logbook::where
     }
 

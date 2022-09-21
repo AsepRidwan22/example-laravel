@@ -27,6 +27,7 @@ class DashboardDosenController extends Controller
                 'mahasiswas' => Mahasiswa::all()
             ]);
         } else if (auth()->user()->roles === 'mahasiswa') {
+            // dd(Mahasiswa::where('id', auth()->user()->id)->value('id'));
 
             $dosen_id = Mahasiswa::where('id', auth()->user()->id)->value('dosen_id');
 
@@ -69,9 +70,9 @@ class DashboardDosenController extends Controller
 
         $rules = [
             'nama' => 'required|max:255',
-            'nidn' => 'required|unique:dosens',
-            'email' => 'required|unique:dosens',
-            'noHp' => 'required|unique:dosens',
+            'nidn' => 'required',
+            'email' => 'required',
+            'noHp' => 'required',
             'linkGroup' => 'required',
             'photo' => 'image|file|max:1024'
         ];
@@ -175,7 +176,10 @@ class DashboardDosenController extends Controller
         // if ($dosen->image) {
         //     Storage::delete($dosen->image);
         // }
+        // dd(User::where('username', $dosen->nidn)->value('id'));
+        $idUser = User::where('username', $dosen->nidn)->get('id');
         dosen::destroy($dosen->id);
-        return redirect('/dashboard/dosens')->with('danger', 'post has been deleted!');
+        User::destroy($idUser);
+        return redirect('/dashboard/dosens')->with('danger', 'Data dosen berhasil dihapus');
     }
 }

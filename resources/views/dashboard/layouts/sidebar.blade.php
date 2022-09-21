@@ -32,7 +32,7 @@
             @canany(['koordinator', 'dosen', 'mahasiswa'])
                 <li class="nav-item">
                     <a class="nav-link {{ Request::is('dashboard/profile*') ? 'active' : '' }}" href="/dashboard/profile">
-                        <span data-feather="file-text" class="align-text-bottom"></span>
+                        <span data-feather="user" class="align-text-bottom"></span>
                         Profile
                     </a>
                 </li>

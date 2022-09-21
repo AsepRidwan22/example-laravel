@@ -53,6 +53,26 @@
                 @enderror
             </div>
             <div class="mb-3">
+                <label for="angkatan" class="form-label">Angkatan</label>
+                <input type="text" class="form-control @error('angkatan') is-invalid @enderror" id="angkatan"
+                    name="angkatan" value="{{ old('angkatan') }}" required autocomplete="off">
+                @error('angkatan')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label for="priode" class="form-label">Priode Kerja Praktek</label>
+                <input type="text" class="form-control @error('priode') is-invalid @enderror" id="priode"
+                    name="priode" value="{{ old('priode') }}" required autocomplete="off">
+                @error('priode')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label for="noHp" class="form-label">Nomor HP</label>
                 <input type="text" class="form-control @error('noHp') is-invalid @enderror" id="noHp" name="noHp"
                     value="{{ old('noHp') }}" required autocomplete="off">

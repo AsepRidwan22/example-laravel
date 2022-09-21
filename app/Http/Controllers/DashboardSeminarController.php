@@ -146,7 +146,8 @@ class DashboardSeminarController extends Controller
         // dd($seminar->id);
         if (auth()->user()->roles === 'mahasiswa') {
             return view('dashboard.seminars.jadwal', [
-                'seminars' => Seminar::where('mahasiswa_id', auth()->user()->id)->get()
+                'seminars' => Seminar::where('mahasiswa_id', auth()->user()->id)->get(),
+                'first' => Seminar::where('mahasiswa_id', auth()->user()->id)->first('id')
             ]);
         } else if (auth()->user()->roles === 'dosen') {
             $id = Dosen::where('user_id', auth()->user()->id)->pluck('id');

@@ -16,15 +16,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-            <main class="form-signin w-100 m-auto">
-                <h1 class="h3 mb-3 fw-normal text-center">Please login</h1>
+            <main class="form-signin w-100 my-30">
+                <img src="http://alumni.ft.unsur.ac.id/assets/img/logo_ft.png" class="mx-auto d-block" alt="Profile Dosen"
+                    width="200" style="object-fit: cover;">
+                <h1 class="h3 my-5 fw-normal text-center">Silahkan login</h1>
                 <form action="/login" method="POST">
                     @csrf
                     <div class="form-floating">
                         <input type="number" class="form-control @error('username') is-invalid @enderror" name="username"
                             id="username" placeholder="name@example.com" required value="{{ old('username') }}" autofocus
                             autocomplete="off">
-                        <label for="username">NPM / NIDN</label>
+                        <label for="username">Username</label>
                         @error('username')
                             <div class="invalid-feedback">
                                 {{ $message }}

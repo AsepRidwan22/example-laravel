@@ -28,6 +28,8 @@ class MahasiswasImport implements WithHeadingRow, ToModel
             'nama' => $row['name'],
             'npm' => $row['npm'],
             'kelas' => $row['kelas'],
+            'angkatan' => $row['angkatan'],
+            'priode' => $row['priode'],
             'email' => $row['email'],
             'noHp' => $row['telepon'],
             'user_id' => $user

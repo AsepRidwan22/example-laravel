@@ -21,7 +21,7 @@ class DashboardProgresController extends Controller
         // dd(Proposal::where('user_id', auth()->user()->id)->value('isAccProposal'));
         if (auth()->user()->roles === 'mahasiswa') {
             return view('dashboard.progres.index', [
-                'checkProposal' => Proposal::where('mahasiswa_id', auth()->user()->id)->value('isAccProposal'),
+                'checkProposal' => Proposal::where('user_id', auth()->user()->id)->value('isAccProposal'),
                 'progress' => Progres::where('user_id', auth()->user()->id)->get()
             ]);
         } elseif (auth()->user()->roles === 'dosen') {
@@ -35,7 +35,7 @@ class DashboardProgresController extends Controller
     public function showProgresMhs($id)
     {
         return view('dashboard.progres.index', [
-            'checkProposal' => Proposal::where('mahasiswa_id', auth()->user()->id)->value('isAccProposal'),
+            'checkProposal' => 1,
             'progress' => Progres::where('user_id', $id)->get()
         ]);
     }

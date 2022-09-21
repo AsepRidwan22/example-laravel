@@ -101,10 +101,12 @@ class DashboardMahasiswaController extends Controller
 
         $rules = [
             'nama' => 'required|max:255',
-            'npm' => 'required|unique:mahasiswas',
+            'npm' => 'required',
+            'angkatan' => 'required',
+            'priode' => 'required',
             'kelas' => 'required',
             'noHp' => 'required',
-            'email' => 'required|email|unique:mahasiswas',
+            'email' => 'required|email',
             'photo' => 'image|file|max:1024'
         ];
 

@@ -20,7 +20,7 @@
     <div class="table-responsive col-lg-12">
         @can('koordinator')
             <a href="/dashboard/mahasiswas/create" class="btn btn-primary">Tambah Mahasiswa</a>
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#importDataModal">Import</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#importDataModal">Import</button>
             <div class="modal fade" id="importDataModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -77,8 +77,8 @@
                         <td class="pt-3 text-center">
                             @can('dosen')
                             @endcan
-                            <a href="/dashboard/mahasiswas/{{ $mahasiswa->slug }}/edit"
-                                class="btn btn-primary btn-sm">Lihat</a>
+                            {{-- <a href="/dashboard/mahasiswas/{{ $mahasiswa->slug }}/edit"
+                                class="btn btn-primary btn-sm">Lihat</a> --}}
                             @can('koordinator')
                                 <a href="/dashboard/mahasiswas/{{ $mahasiswa->slug }}/edit"
                                     class="btn btn-warning btn-sm">Ubah</a>

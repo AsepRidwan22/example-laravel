@@ -76,10 +76,15 @@
                         @can('dosen')
                             @if ($logbook->isHadir === null)
                                 <div class="text-center mt-3">
-                                    <a href="/dashboard/logbooks/{{ $logbook->id }}/edit"
+                                    {{-- <a href="/dashboard/logbooks/{{ $logbook->id }}/edit"
                                         class="btn btn-primary @if ($logbook->body === null) disabled @endif">Verifikasi
-                                        Logbook</a>
+                                        Logbook</a> --}}
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                        data-target="#logbookEdit{{ $logbook->id }}">
+                                        Verifikasi Logbook
+                                    </button>
                                 </div>
+                                @include('dashboard.logbooks.edit')
                             @endif
                         @endcan
                     </div>
@@ -90,7 +95,7 @@
         <div class=" image d-flex flex-column justify-content-center align-items-center">
             <img src="https://img.freepik.com/premium-vector/file-found-illustration-with-confused-people-holding-big-magnifier-search-no-result_258153-336.jpg?w=2000"
                 class="mx-auto d-block" alt="Profile Dosen" width="500" style="object-fit: cover;">
-            <p class="idd">Belum punya Pembimbing!</p>
+            <p class="idd">Belum punya Logbook!</p>
             <p>Silahkan ACC proposal terlebih dahulu</p>
         </div>
     @endif
